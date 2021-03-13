@@ -113,7 +113,7 @@
 <br>
 <p>
     <img align="left"
-        src="https://github-readme-stats.vercel.app/api/top-langs?username=printf-dj&show_icons=true&locale=en&layout=compact&hide_border=1"
+        src="https://github-readme-stats.vercel.app/api/top-langs?username=printf-dj&show_icons=true&locale=en&layout=compact&hide_border=1&title_color=333333"
         alt="printf-dj" />
 </p>
 
