@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Dixit Jhinkwan</h1>
 <h3 align="center">A passionate frontend developer from India</h3>
 
-<p align="left"> ![Profile views](https://gpvc.arturio.dev/printf-dj) </p>
+![Profile views](https://gpvc.arturio.dev/printf-dj)
 
 <p align="left"> <a href="https://twitter.com/printf_dj" target="blank"><img src="https://img.shields.io/twitter/follow/printf_dj?logo=twitter&style=for-the-badge" alt="printf_dj" /></a> </p>
 
