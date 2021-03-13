@@ -108,12 +108,11 @@
 </p>
 <p>
    <img align="left"
-        src="https://github-readme-stats.vercel.app/api?username=printf-dj&show_icons=true&locale=en&border_radius=25" alt="printf-dj" />
+        src="https://github-readme-stats.vercel.app/api?username=printf-dj&show_icons=true&locale=en&hide_border=1" alt="printf-dj" />
 </p>
 <br>
-<br>
 <p>
-    <img align="centre"
+    <img align="left"
         src="https://github-readme-stats.vercel.app/api/top-langs?username=printf-dj&show_icons=true&locale=en&layout=compact&hide_border=1"
         alt="printf-dj" />
 </p>
