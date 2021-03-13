@@ -108,7 +108,7 @@
 </p>
 <p>
    <img align="left"
-        src="https://github-readme-stats.vercel.app/api?username=printf-dj&show_icons=true&locale=en&hide_border=1" alt="printf-dj" />
+        src="https://github-readme-stats.vercel.app/api?username=printf-dj&show_icons=true&locale=en&hide_border=1&title_color=333333" alt="printf-dj" />
 </p>
 <br>
 <p>
