@@ -3,8 +3,6 @@
 
 ![Profile views](https://gpvc.arturio.dev/printf-dj)
 
-<p align="left"> <a href="https://twitter.com/printf_dj" target="blank"><img src="https://img.shields.io/twitter/follow/printf_dj?logo=twitter&style=for-the-badge" alt="printf_dj" /></a> </p>
-
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://twitter.com/printf_dj" target="blank"><img align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/twitter.svg" alt="printf_dj" height="30" width="40" /></a>
