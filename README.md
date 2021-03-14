@@ -6,7 +6,7 @@
 </p>
 
 <h3 align="left">Connect with me:</h3>
-<p align="left">
+<p>
 
 [![Twitter - @printf_dj](https://img.shields.io/static/v1?label=Twitter&message=%40printf_dj&color=1DA1F2&logo=twitter)](https://twitter.com/printf_dj)   
 [![Facebook - dixitjhinkwan ](https://img.shields.io/static/v1?label=Facebook&message=dixitjhinkwan+&color=1877f2&logo=facebook&logoColor=white)](https://fb.com/dixitjhinkwan)
