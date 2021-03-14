@@ -7,36 +7,10 @@
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-    _Dash badge_
 
-[![Twitter - @printf_dj](https://img.shields.io/badge/Twitter-%40printf__dj-1DA1F2?logo=twitter)](https://twitter.com/printf_dj)
-
-_Query parameter badge_
-
-[![Twitter - @printf_dj](https://img.shields.io/static/v1?label=Twitter&message=%40printf_dj&color=1DA1F2&logo=twitter)](https://twitter.com/printf_dj)
-   
-            _Dash badge_
-
-            [![Facebook - dixitjhinkwan ](https://img.shields.io/badge/Facebook-dixitjhinkwan_-1877f2?logo=facebook&logoColor=white)](https://fb.com/dixitjhinkwan)
-            
-            _Query parameter badge_
-            
-            [![Facebook - dixitjhinkwan ](https://img.shields.io/static/v1?label=Facebook&message=dixitjhinkwan+&color=1877f2&logo=facebook&logoColor=white)](https://fb.com/dixitjhinkwan)
-           
-            _Dash badge_
-
-[![Instagram  - printf_dj ](https://img.shields.io/badge/Instagram_-printf__dj_-E4405F?logo=instagram&logoColor=E4405F)](https://instagram.com/printf_dj)
-
-_Query parameter badge_
-
+[![Twitter - @printf_dj](https://img.shields.io/static/v1?label=Twitter&message=%40printf_dj&color=1DA1F2&logo=twitter)](https://twitter.com/printf_dj)   
+[![Facebook - dixitjhinkwan ](https://img.shields.io/static/v1?label=Facebook&message=dixitjhinkwan+&color=1877f2&logo=facebook&logoColor=white)](https://fb.com/dixitjhinkwan)
 [![Instagram  - printf_dj ](https://img.shields.io/static/v1?label=Instagram+&message=printf_dj+&color=E4405F&logo=instagram&logoColor=E4405F)](https://instagram.com/printf_dj)
-      
-            _Dash badge_
-
-[![LinkedIn - dixitjhinkwan ](https://img.shields.io/badge/LinkedIn-dixitjhinkwan_-0A66C2?logo=linkedin)](https://linkedin.com/in/dixitjhinkwan)
-
-_Query parameter badge_
-
 [![LinkedIn - dixitjhinkwan ](https://img.shields.io/static/v1?label=LinkedIn&message=dixitjhinkwan+&color=0A66C2&logo=linkedin)](https://linkedin.com/in/dixitjhinkwan)
 
 </p>
