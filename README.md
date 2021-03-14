@@ -7,18 +7,38 @@
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
-    <a href="https://twitter.com/printf_dj" target="blank"><img align="center"
-            src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/twitter.svg" alt="printf_dj" height="30"
-            width="40" /></a>
-    <a href="https://linkedin.com/in/dixitjhinkwan" target="blank"><img align="center"
-            src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg" alt="dixitjhinkwan" height="30"
-            width="40" /></a>
-    <a href="https://fb.com/dixitjhinkwan" target="blank"><img align="center"
-            src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/facebook.svg" alt="dixitjhinkwan" height="30"
-            width="40" /></a>
-    <a href="https://instagram.com/printf_dj" target="blank"><img align="center"
-            src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg" alt="printf_dj" height="30"
-            width="40" /></a>
+    _Dash badge_
+
+[![Twitter - @printf_dj](https://img.shields.io/badge/Twitter-%40printf__dj-1DA1F2?logo=twitter)](https://twitter.com/printf_dj)
+
+_Query parameter badge_
+
+[![Twitter - @printf_dj](https://img.shields.io/static/v1?label=Twitter&message=%40printf_dj&color=1DA1F2&logo=twitter)](https://twitter.com/printf_dj)
+   
+            _Dash badge_
+
+            [![Facebook - dixitjhinkwan ](https://img.shields.io/badge/Facebook-dixitjhinkwan_-1877f2?logo=facebook&logoColor=white)](https://fb.com/dixitjhinkwan)
+            
+            _Query parameter badge_
+            
+            [![Facebook - dixitjhinkwan ](https://img.shields.io/static/v1?label=Facebook&message=dixitjhinkwan+&color=1877f2&logo=facebook&logoColor=white)](https://fb.com/dixitjhinkwan)
+           
+            _Dash badge_
+
+[![Instagram  - printf_dj ](https://img.shields.io/badge/Instagram_-printf__dj_-E4405F?logo=instagram&logoColor=E4405F)](https://instagram.com/printf_dj)
+
+_Query parameter badge_
+
+[![Instagram  - printf_dj ](https://img.shields.io/static/v1?label=Instagram+&message=printf_dj+&color=E4405F&logo=instagram&logoColor=E4405F)](https://instagram.com/printf_dj)
+      
+            _Dash badge_
+
+[![LinkedIn - dixitjhinkwan ](https://img.shields.io/badge/LinkedIn-dixitjhinkwan_-0A66C2?logo=linkedin)](https://linkedin.com/in/dixitjhinkwan)
+
+_Query parameter badge_
+
+[![LinkedIn - dixitjhinkwan ](https://img.shields.io/static/v1?label=LinkedIn&message=dixitjhinkwan+&color=0A66C2&logo=linkedin)](https://linkedin.com/in/dixitjhinkwan)
+
 </p>
 
 <h3 align="left">Languages and Tools:</h3>
@@ -98,6 +118,10 @@
     &nbsp;
     <a href="https://www.figma.com/" target="_blank">
         <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40" />
+    </a>
+    &nbsp;
+    <a href="https://www.photoshop.com/en" target="_blank">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/adobephotoshop.svg" height="40" width="40"  />
     </a>
 
 </p>
