@@ -5,7 +5,7 @@
 </p>
 <h3 align="left">Connect with me:</h3>
 <p>
-<a href="https://twitter.com/printf_dj)" target="_blank">
+<a href="https://twitter.com/printf_dj" target="_blank">
     <img src="https://img.shields.io/static/v1?label=Twitter&message=%40printf_dj&color=1DA1F2&logo=twitter"
     />
 </a>
@@ -15,13 +15,11 @@
     />
 </a>
 &nbsp;
-
 <a href="https://instagram.com/printf_dj" target="_blank">
     <img src="https://img.shields.io/static/v1?label=Instagram+&message=printf_dj+&color=E4405F&logo=instagram&logoColor=E4405F"
     />
 </a>
 &nbsp;
-
 <a href="https://linkedin.com/in/dixitjhinkwan" target="_blank">
     <img src="https://img.shields.io/static/v1?label=LinkedIn&message=dixitjhinkwan+&color=0A66C2&logo=linkedin"
     />
