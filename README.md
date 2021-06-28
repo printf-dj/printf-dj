@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
-<body>
+<body style="background-color:#ffffff;">
 	<h1 align="center">Hi 👋, I'm Dixit Jhinkwan</h1>
 	<h3 align="center">A passionate frontend developer from India.</h3>
 	<p align="right">
@@ -35,8 +35,8 @@
 		</a>
 	</p>
 
-	<h3 align="left">Languages and Tools:</h3>
-	<p align="center">
+<h3 align="left">Languages and Tools:</h3>
+		<p align="center">
 		<a href="https://www.cprogramming.com/" target="_blank">
 			<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c"
 				width="40" height="40" />
