@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
-<body style="background-color:#ffffff;">
+<body>
 	<h1 align="center">Hi 👋, I'm Dixit Jhinkwan</h1>
 	<h3 align="center">A passionate frontend developer from India.</h3>
 	<p align="right">
