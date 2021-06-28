@@ -14,7 +14,7 @@
     <img src="https://img.shields.io/static/v1?label=Facebook&message=dixitjhinkwan+&color=1877f2&logo=facebook&logoColor=white"
     />
 </a>
-&nbsp;
+<br>
 <a href="https://instagram.com/printf_dj" target="_blank">
     <img src="https://img.shields.io/static/v1?label=Instagram+&message=printf_dj+&color=E4405F&logo=instagram&logoColor=E4405F"
     />
