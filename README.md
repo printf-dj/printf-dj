@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -163,7 +163,7 @@
 			src="https://github-readme-stats.vercel.app/api/top-langs?username=printf-dj&show_icons=true&locale=en&layout=compact&hide_border=1&title_color=333333"
 			alt="printf-dj" />
 	</p>
-
+<p>Stay tuned, website under development</p>
 </body>
 
 </html>
