@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dixit Jhinkwan | Frontend Developer & UI Architect</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2310b981%22/><text x=%2216%22 y=%2222%22 font-family=%22monospace%22 font-size=%2214%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>DJ</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,6 +60,19 @@
             max-width: 100vw;
         }
 
+        /* Hide scrollbar completely across all browsers and devices */
+        body::-webkit-scrollbar,
+        html::-webkit-scrollbar,
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        body, html, * {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+
         .terminal-font {
             font-family: 'Fira Code', monospace;
             letter-spacing: 0em;
@@ -80,41 +94,43 @@
             color: #0f172a;
         }
 
-        /* Prevent canvas and absolute ambient orbs from creating horizontal scrollbars */
         #bg-canvas {
             max-width: 100vw;
             overflow: hidden;
         }
 
+        /* Enhanced Glassmorphism styling with increased light mode transparency */
         .glass-card {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease;
             will-change: transform;
         }
 
         .dark .glass-card {
-            background: rgba(30, 41, 59, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+            background: rgba(22, 30, 49, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
         }
 
         html:not(.dark) .glass-card {
-            background: rgba(255, 255, 255, 0.45);
-            border: 1px solid rgba(165, 180, 252, 0.35);
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.08);
+            background: rgba(255, 255, 255, 0.38);
+            border: 1px solid rgba(165, 180, 252, 0.3);
+            box-shadow: 0 16px 35px -5px rgba(99, 102, 241, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.6);
         }
 
         .dark .glass-card-hover:hover {
-            background: rgba(51, 65, 85, 0.85);
-            border-color: rgba(52, 211, 153, 0.5);
-            transform: translateY(-4px) scale(1.01);
+            background: rgba(35, 48, 76, 0.82);
+            border-color: rgba(52, 211, 153, 0.55);
+            box-shadow: 0 20px 45px -10px rgba(16, 185, 129, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.01);
         }
 
         html:not(.dark) .glass-card-hover:hover {
-            background: rgba(255, 255, 255, 0.75);
-            border-color: rgba(99, 102, 241, 0.6);
-            transform: translateY(-4px) scale(1.01);
+            background: rgba(255, 255, 255, 0.65);
+            border-color: rgba(99, 102, 241, 0.55);
+            box-shadow: 0 20px 40px -8px rgba(99, 102, 241, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            transform: translateY(-5px) scale(1.01);
         }
 
         /* Ambient floating glow animation */
@@ -131,18 +147,18 @@
         .bg-glow-orb {
             position: fixed;
             border-radius: 50%;
-            filter: blur(130px);
+            filter: blur(140px);
             pointer-events: none;
             z-index: 0;
             will-change: transform;
         }
 
         .dark .bg-glow-orb {
-            opacity: 0.25;
+            opacity: 0.35;
         }
 
         html:not(.dark) .bg-glow-orb {
-            opacity: 0.55;
+            opacity: 0.65;
         }
 
         #orb-1 {
@@ -153,7 +169,6 @@
             animation: float-reverse 18s ease-in-out infinite;
         }
 
-        /* Parallax layer wrapper class */
         .parallax-layer {
             will-change: transform;
             transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
@@ -165,29 +180,10 @@
             -webkit-text-fill-color: transparent;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: #0b132b;
-        }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        html:not(.dark) ::-webkit-scrollbar-track {
-            background: #e2e8f0;
-        }
-        html:not(.dark) ::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 4px;
-        }
-
         .terminal-shadow {
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.6);
         }
 
-        /* Waving hand animation */
         @keyframes wave {
             0% { transform: rotate(0deg); }
             15% { transform: rotate(14deg); }
@@ -202,6 +198,14 @@
             display: inline-block;
             transform-origin: 70% 70%;
             animation: wave 2.2s infinite;
+        }
+
+        /* Hover animation for UI arrows */
+        .ui-arrow {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        button:hover .ui-arrow, a:hover .ui-arrow {
+            transform: translateX(3px) translateY(-3px);
         }
 
         .social-btn {
@@ -245,15 +249,6 @@
             transform: translateY(-2px);
         }
         .instagram-hover:hover svg {
-            color: #ffffff !important;
-        }
-
-        .email-hover:hover {
-            background-color: #0d9488 !important;
-            border-color: #0d9488 !important;
-            transform: translateY(-2px);
-        }
-        .email-hover:hover svg {
             color: #ffffff !important;
         }
 
@@ -331,7 +326,7 @@
     <div id="orb-2" class="bg-glow-orb w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-indigo-500 dark:bg-indigo-600 top-[25%] right-[-150px]" data-speed="-0.04"></div>
 
     <header class="fixed top-0 left-0 right-0 z-50 py-3 px-3 sm:px-6 md:px-12 w-full max-w-[100vw]" id="navbar">
-        <div class="w-full max-w-7xl mx-auto flex flex-col glass-card px-3 sm:px-6 py-2.5 rounded-2xl sm:rounded-full border border-slate-300 dark:border-slate-800/80 shadow-md relative">
+        <div class="w-full max-w-7xl mx-auto flex flex-col glass-card px-3 sm:px-6 py-2.5 rounded-2xl sm:rounded-full shadow-lg relative">
             <div class="flex items-center justify-between w-full">
                 <a href="#hero" class="flex items-center space-x-2 group shrink-0">
                     <span class="font-mono text-xs sm:text-sm tracking-wider font-semibold">
@@ -347,20 +342,20 @@
                 </nav>
 
                 <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
-                    <button id="theme-toggle" class="px-2.5 sm:px-3 py-1.5 rounded-full glass-card border border-slate-300 dark:border-slate-800/60 flex items-center space-x-1 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer" title="Toggle Theme">
+                    <button id="theme-toggle" class="px-2.5 sm:px-3 py-1.5 rounded-full glass-card flex items-center space-x-1 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer" title="Toggle Theme">
                         <i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block text-amber-400"></i>
                         <i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden text-indigo-600"></i>
                         <span id="theme-label" class="text-xs font-mono font-semibold tracking-wider text-indigo-600 dark:text-emerald-400">Light</span>
                     </button>
 
-                    <button id="mobile-menu-btn" class="md:hidden p-1.5 sm:p-2 rounded-xl glass-card border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none active:scale-95 transition-transform" aria-label="Toggle Menu">
+                    <button id="mobile-menu-btn" class="md:hidden p-1.5 sm:p-2 rounded-xl glass-card text-slate-700 dark:text-slate-200 focus:outline-none active:scale-95 transition-transform shadow-sm" aria-label="Toggle Menu">
                         <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Drawer Menu -->
-            <div id="mobile-menu" class="hidden md:hidden w-full mt-3 pt-3 border-t border-slate-300 dark:border-slate-800/80 flex flex-col space-y-1 font-medium text-sm">
+            <div id="mobile-menu" class="hidden md:hidden w-full mt-3 pt-3 border-t dark:border-white/10 border-indigo-200/50 flex flex-col space-y-1 font-medium text-sm">
                 <a href="#about" class="mobile-link px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 flex items-center gap-2.5 text-slate-700 dark:text-slate-200 transition-colors"><i data-lucide="user" class="w-4 h-4 text-emerald-500"></i> About</a>
                 <a href="#tech" class="mobile-link px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 flex items-center gap-2.5 text-slate-700 dark:text-slate-200 transition-colors"><i data-lucide="cpu" class="w-4 h-4 text-emerald-500"></i> Tech Stack</a>
                 <a href="#terminal" class="mobile-link px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 flex items-center gap-2.5 text-slate-700 dark:text-slate-200 transition-colors"><i data-lucide="terminal" class="w-4 h-4 text-emerald-500"></i> Console</a>
@@ -372,12 +367,12 @@
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-24 sm:pt-28 space-y-20 md:space-y-24 w-full overflow-x-hidden">
 
         <section id="hero" class="min-h-[70vh] flex flex-col justify-center items-center text-center pt-2 parallax-layer" data-parallax-depth="15">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-6">
-                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-6 shadow-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 Available for frontend & UI collaborations
             </div>
 
-            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-tight drop-shadow-sm">
                 Hi <span class="wave-emoji">👋</span>, <br />
                 I'm <span class="text-gradient">Dixit Jhinkwan</span>
             </h1>
@@ -387,17 +382,17 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 mb-8">
-                <a href="#tech" class="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-md hover:scale-[1.02] transition-transform duration-150 flex items-center justify-center gap-2">
-                    Explore Skills <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <a href="#tech" class="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-xl hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 group">
+                    Explore Skills <i data-lucide="sparkles" class="w-4 h-4 ui-arrow"></i>
                 </a>
-                <a href="#terminal" class="w-full sm:w-auto px-7 py-3 rounded-full glass-card dark:text-slate-200 text-slate-800 font-semibold text-sm border dark:border-slate-800 border-slate-300 hover:border-emerald-500/50 transition-colors duration-150 flex items-center justify-center gap-2">
+                <a href="#terminal" class="w-full sm:w-auto px-7 py-3 rounded-full glass-card dark:text-slate-200 text-slate-800 font-semibold text-sm hover:border-emerald-500/50 transition-all duration-200 flex items-center justify-center gap-2 shadow-md group">
                     Launch Interactive CLI <i data-lucide="terminal" class="w-4 h-4 text-emerald-500"></i>
                 </a>
             </div>
         </section>
 
         <section id="about" class="space-y-6 sm:space-y-8 scroll-mt-24">
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-slate-800/80 border-slate-300 pb-4">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-white/10 border-indigo-200/50 pb-4">
                 <div>
                     <h2 class="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">// Profile & Philosophy</h2>
                     <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 mt-1">Design Systems & Clean Code</h3>
@@ -410,7 +405,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 glass-card glass-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between">
                     <div class="space-y-4">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-4">
+                        <div class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-emerald-500 mb-4 shadow-sm border border-emerald-500/20">
                             <i data-lucide="code-2" class="w-6 h-6"></i>
                         </div>
                         <h4 class="text-xl sm:text-2xl font-bold dark:text-white text-slate-900">Modern Frontend & Interactive Engineering</h4>
@@ -419,9 +414,9 @@
                         </p>
                     </div>
 
-                    <div class="mt-8 pt-6 border-t dark:border-slate-800/80 border-slate-200 flex flex-wrap gap-2 text-xs font-mono dark:text-slate-400 text-slate-600">
-                        <span class="px-3 py-1.5 rounded-lg dark:bg-slate-900/90 bg-slate-100 border dark:border-slate-800 border-slate-300 text-emerald-600 dark:text-emerald-400 font-semibold">⚡ Performance Optimized</span>
-                        <span class="px-3 py-1.5 rounded-lg dark:bg-slate-900/90 bg-slate-100 border dark:border-slate-800 border-slate-300 text-indigo-600 dark:text-indigo-400 font-semibold">🎨 Modern UI Design</span>
+                    <div class="mt-8 pt-6 border-t dark:border-white/10 border-indigo-200/40 flex flex-wrap gap-2 text-xs font-mono dark:text-slate-400 text-slate-600">
+                        <span class="px-3 py-1.5 rounded-xl glass-card text-emerald-600 dark:text-emerald-400 font-semibold shadow-sm">⚡ Performance Optimized</span>
+                        <span class="px-3 py-1.5 rounded-xl glass-card text-indigo-600 dark:text-indigo-400 font-semibold shadow-sm">🎨 Modern UI Design</span>
                     </div>
                 </div>
 
@@ -431,15 +426,15 @@
                     </h4>
 
                     <div class="space-y-4">
-                        <div class="p-3.5 rounded-2xl dark:bg-slate-900/70 bg-white/40 border dark:border-slate-800/80 border-slate-200/60 backdrop-blur-sm">
+                        <div class="p-3.5 rounded-2xl glass-card shadow-sm">
                             <div class="text-xs dark:text-slate-400 text-slate-500 font-mono">Primary Frontend</div>
                             <div class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-1">JavaScript / AngularJS / Tailwind</div>
                         </div>
-                        <div class="p-3.5 rounded-2xl dark:bg-slate-900/70 bg-white/40 border dark:border-slate-800/80 border-slate-200/60 backdrop-blur-sm">
+                        <div class="p-3.5 rounded-2xl glass-card shadow-sm">
                             <div class="text-xs dark:text-slate-400 text-slate-500 font-mono">Backend Stack</div>
                             <div class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mt-1">Node.js, C#, Java, MySQL</div>
                         </div>
-                        <div class="p-3.5 rounded-2xl dark:bg-slate-900/70 bg-white/40 border dark:border-slate-800/80 border-slate-200/60 backdrop-blur-sm">
+                        <div class="p-3.5 rounded-2xl glass-card shadow-sm">
                             <div class="text-xs dark:text-slate-400 text-slate-500 font-mono">Design & Creative Media</div>
                             <div class="text-sm font-semibold text-purple-600 dark:text-purple-400 mt-1">Premiere Pro / Photoshop / Canva</div>
                         </div>
@@ -449,18 +444,18 @@
         </section>
 
         <section id="tech" class="space-y-6 sm:space-y-8 scroll-mt-24">
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 border-b dark:border-slate-800/80 border-slate-300 pb-5">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 border-b dark:border-white/10 border-indigo-200/50 pb-5">
                 <div class="space-y-2">
                     <h2 class="text-xs font-mono text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">// Toolbox & Ecosystem</h2>
                     <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 leading-snug">Languages & Technologies</h3>
                     <p class="text-xs sm:text-sm dark:text-slate-400 text-slate-600 pt-1">Hover or tap any card to view proficiency ratings.</p>
                 </div>
                 <div class="flex flex-wrap gap-2 w-full md:w-auto" id="tech-filters">
-                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-xs font-mono bg-emerald-500 text-white font-bold shadow-md shadow-emerald-500/20 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 hover:shadow-emerald-500/40">All</button>
-                    <button data-filter="frontend" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 border border-slate-300 dark:border-slate-800/60 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 hover:border-emerald-500/50 hover:shadow-sm">Frontend</button>
-                    <button data-filter="backend" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 border border-slate-300 dark:border-slate-800/60 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 hover:border-emerald-500/50 hover:shadow-sm">Backend & DB</button>
-                    <button data-filter="cloud" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 border border-slate-300 dark:border-slate-800/60 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 hover:border-emerald-500/50 hover:shadow-sm">Cloud & Tools</button>
-                    <button data-filter="design" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 border border-slate-300 dark:border-slate-800/60 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 hover:border-emerald-500/50 hover:shadow-sm">Media & Design</button>
+                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full text-xs font-mono bg-emerald-500 text-white font-bold shadow-lg shadow-emerald-500/20 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300">All</button>
+                    <button data-filter="frontend" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">Frontend</button>
+                    <button data-filter="backend" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">Backend & DB</button>
+                    <button data-filter="cloud" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">Cloud & Tools</button>
+                    <button data-filter="design" class="filter-btn px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 dark:hover:text-white hover:text-emerald-700 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">Media & Design</button>
                 </div>
             </div>
 
@@ -470,49 +465,47 @@
         </section>
 
         <section id="terminal" class="space-y-6 sm:space-y-8 scroll-mt-24">
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-slate-800/80 border-slate-300 pb-4">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-white/10 border-indigo-200/50 pb-4">
                 <div>
                     <h2 class="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">// Interactive Console</h2>
                     <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 mt-1">Dixit's Shell Terminal</h3>
                 </div>
                 <div class="dark:text-slate-400 text-slate-600 text-xs font-mono">
-                    Type <span class="text-emerald-600 dark:text-emerald-400 font-bold">help</span> or press <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-[10px]">Tab</kbd> to autocomplete
+                    Type <span class="text-emerald-600 dark:text-emerald-400 font-bold">help</span> or press <kbd class="px-1.5 py-0.5 rounded glass-card text-[10px]">Tab</kbd> to autocomplete
                 </div>
             </div>
 
-            <div class="w-full rounded-2xl dark:bg-[#070b14] bg-slate-50/90 border border-slate-300/80 dark:border-emerald-500/35 terminal-font text-sm sm:text-base terminal-shadow overflow-hidden dark:text-slate-200 text-slate-800 backdrop-blur-md transition-colors duration-300 relative">
-                <div class="dark:bg-slate-950/90 bg-slate-200/80 px-4 py-3 flex items-center justify-between border-b border-slate-300 dark:border-slate-800 transition-colors duration-300">
+            <div class="w-full rounded-2xl glass-card terminal-font text-sm sm:text-base terminal-shadow overflow-hidden dark:text-slate-200 text-slate-800 relative">
+                <div class="dark:bg-slate-900/60 bg-white/40 px-4 py-3 flex items-center justify-between border-b dark:border-white/10 border-indigo-200/40 backdrop-blur-md">
                     <div class="flex items-center space-x-2 w-1/4">
-                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-rose-500 shadow-sm"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500 shadow-sm"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500 shadow-sm"></div>
                     </div>
                     <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-mono font-medium text-center w-2/4 tracking-wide">
                         printfDJ — bash
                     </div>
-                    <div id="terminal-dimensions" class="text-xs text-slate-500 dark:text-slate-500 font-mono text-right w-1/4">80x24</div>
+                    <div id="terminal-dimensions" class="text-xs text-slate-500 dark:text-slate-400 font-mono text-right w-1/4">80x24</div>
                 </div>
 
-                <div id="terminal-body" class="p-4 sm:p-6 h-72 sm:h-80 overflow-y-auto space-y-3 text-slate-800 dark:text-slate-300 relative">
+                <div id="terminal-body" class="p-4 sm:p-6 h-72 sm:h-80 overflow-y-auto space-y-3 text-slate-800 dark:text-slate-300 relative break-words">
                     <div class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm sm:text-base">Welcome to Dixit's Interactive Console v3.1.0</div>
-                    <div class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Type <span class="text-emerald-700 dark:text-emerald-300 font-medium">'neofetch'</span>, <span class="text-emerald-700 dark:text-emerald-300 font-medium">'matrix'</span>, <span class="text-emerald-700 dark:text-emerald-300 font-medium">'about'</span>, or <span class="text-emerald-700 dark:text-emerald-300 font-medium">'help'</span>. Use <kbd class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-[10px]">↑</kbd> <kbd class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-[10px]">↓</kbd> for history.</div>
+                    <div class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Type <span class="text-emerald-700 dark:text-emerald-300 font-medium">'neofetch'</span>, <span class="text-emerald-700 dark:text-emerald-300 font-medium">'about'</span>, or <span class="text-emerald-700 dark:text-emerald-300 font-medium">'help'</span>. Use <kbd class="px-1 py-0.5 rounded glass-card text-[10px]">↑</kbd> <kbd class="px-1 py-0.5 rounded glass-card text-[10px]">↓</kbd> for history.</div>
                     <div id="terminal-history" class="space-y-3"></div>
-                    <canvas id="terminal-matrix-canvas" class="hidden absolute top-0 left-0 w-full h-full pointer-events-none z-10 bg-black/90"></canvas>
                 </div>
 
-                <div class="dark:bg-black/80 bg-slate-200/90 px-4 sm:px-6 py-3 border-t border-slate-300 dark:border-slate-800 flex flex-col gap-2 transition-colors duration-300">
+                <div class="dark:bg-slate-950/70 bg-white/50 px-4 sm:px-6 py-3 border-t dark:border-white/10 border-indigo-200/40 flex flex-col gap-2 backdrop-blur-md">
                     <div class="flex items-center gap-2">
-                        <span class="text-indigo-600 dark:text-indigo-400 font-bold text-sm sm:text-base shrink-0">printfDJ@web:~$</span>
-                        <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-emerald-700 dark:text-emerald-300 terminal-font text-sm sm:text-base focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-slate-500" placeholder="Type command or tap quick actions below..." autocomplete="off">
+                        <span class="text-indigo-600 dark:text-indigo-400 font-bold text-xs sm:text-base shrink-0">printfDJ@web:~$</span>
+                        <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-emerald-700 dark:text-emerald-300 terminal-font text-xs sm:text-base focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-slate-500" placeholder="Type command..." autocomplete="off">
                     </div>
-                    <!-- Quick action bar -->
+                    <!-- Fully responsive quick action bar -->
                     <div class="flex flex-wrap items-center gap-1.5 pt-1 text-xs">
-                        <span class="text-slate-500 font-mono text-[10px] uppercase tracking-wider mr-1">Quick:</span>
-                        <button class="term-quick-btn px-2 py-0.5 rounded bg-slate-300/60 dark:bg-slate-800/80 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono" data-cmd="neofetch">neofetch</button>
-                        <button class="term-quick-btn px-2 py-0.5 rounded bg-slate-300/60 dark:bg-slate-800/80 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono" data-cmd="about">about</button>
-                        <button class="term-quick-btn px-2 py-0.5 rounded bg-slate-300/60 dark:bg-slate-800/80 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono" data-cmd="skills">skills</button>
-                        <button class="term-quick-btn px-2 py-0.5 rounded bg-slate-300/60 dark:bg-slate-800/80 hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono text-emerald-600 dark:text-emerald-400 font-bold" data-cmd="matrix">matrix 🌧️</button>
-                        <button class="term-quick-btn px-2 py-0.5 rounded bg-slate-300/60 dark:bg-slate-800/80 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 transition-colors font-mono" data-cmd="clear">clear</button>
+                        <span class="text-slate-500 font-mono text-[10px] uppercase tracking-wider mr-1 shrink-0">Quick:</span>
+                        <button class="term-quick-btn px-2.5 py-1 rounded-lg glass-card hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono shadow-sm shrink-0" data-cmd="neofetch">neofetch</button>
+                        <button class="term-quick-btn px-2.5 py-1 rounded-lg glass-card hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono shadow-sm shrink-0" data-cmd="about">about</button>
+                        <button class="term-quick-btn px-2.5 py-1 rounded-lg glass-card hover:bg-emerald-500 hover:text-white dark:hover:bg-emerald-500 transition-colors font-mono shadow-sm shrink-0" data-cmd="skills">skills</button>
+                        <button class="term-quick-btn px-2.5 py-1 rounded-lg glass-card hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 transition-colors font-mono shadow-sm shrink-0" data-cmd="clear">clear</button>
                     </div>
                 </div>
             </div>
@@ -520,7 +513,7 @@
 
         <!-- Contact & Connect Section -->
         <section id="contact" class="space-y-6 sm:space-y-8 scroll-mt-24">
-            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-slate-800/80 border-slate-300 pb-4">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-white/10 border-indigo-200/50 pb-4">
                 <div>
                     <h2 class="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">// Get In Touch</h2>
                     <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 mt-1">Let's Connect & Build</h3>
@@ -534,7 +527,7 @@
                 <!-- Direct Email Card -->
                 <div class="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6">
                     <div class="space-y-3">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-2">
+                        <div class="w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-emerald-500 mb-2 shadow-sm border border-emerald-500/20">
                             <i data-lucide="mail-check" class="w-6 h-6"></i>
                         </div>
                         <h4 class="text-xl sm:text-2xl font-bold dark:text-white text-slate-900">Direct Message & Email</h4>
@@ -543,14 +536,14 @@
                         </p>
                     </div>
 
-                    <div class="p-4 rounded-2xl dark:bg-slate-900/80 bg-white/60 border border-slate-300 dark:border-slate-800 flex items-center justify-between gap-3">
+                    <div class="p-4 rounded-2xl glass-card flex items-center justify-between gap-3 shadow-sm">
                         <div class="overflow-hidden">
                             <span class="text-xs font-mono text-slate-500 dark:text-slate-400 block">Primary Email</span>
-                            <span class="text-sm font-semibold font-mono text-slate-900 dark:text-emerald-400 truncate block">******@#####.in</span>
+                            <span class="text-sm font-semibold font-mono text-slate-900 dark:text-emerald-400 truncate block">*****@####.in</span>
                         </div>
-                        <a href="mailto:dixitjhinkwan@outlook.in" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs transition-colors shrink-0 flex items-center gap-1.5">
-                            Send Email <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-                        </a>
+                        <button id="open-captcha-btn" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs transition-colors shrink-0 flex items-center gap-1.5 shadow-md group">
+                            Send Email <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 ui-arrow"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -568,7 +561,7 @@
                     <div class="flex flex-wrap items-center gap-4 pt-2">
                         <!-- GitHub -->
                         <div class="social-item" data-social="github">
-                            <a href="https://github.com/printf-dj" target="_blank" rel="noopener noreferrer" class="social-btn github-hover w-12 h-12 rounded-2xl glass-card border border-slate-300 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200" aria-label="GitHub">
+                            <a href="https://github.com/printf-dj" target="_blank" rel="noopener noreferrer" class="social-btn github-hover w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-700 dark:text-slate-200 shadow-sm" aria-label="GitHub">
                                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                                 </svg>
@@ -578,7 +571,7 @@
 
                         <!-- Twitter/X -->
                         <div class="social-item" data-social="twitter">
-                            <a href="https://twitter.com/printf_dj" target="_blank" rel="noopener noreferrer" class="social-btn twitter-hover w-12 h-12 rounded-2xl glass-card border border-slate-300 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200" aria-label="Twitter">
+                            <a href="https://twitter.com/printf_dj" target="_blank" rel="noopener noreferrer" class="social-btn twitter-hover w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-700 dark:text-slate-200 shadow-sm" aria-label="Twitter">
                                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                                 </svg>
@@ -588,7 +581,7 @@
 
                         <!-- LinkedIn -->
                         <div class="social-item" data-social="linkedin">
-                            <a href="https://linkedin.com/in/dixitjhinkwan" target="_blank" rel="noopener noreferrer" class="social-btn linkedin-hover w-12 h-12 rounded-2xl glass-card border border-slate-300 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200" aria-label="LinkedIn">
+                            <a href="https://linkedin.com/in/dixitjhinkwan" target="_blank" rel="noopener noreferrer" class="social-btn linkedin-hover w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-700 dark:text-slate-200 shadow-sm" aria-label="LinkedIn">
                                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/>
                                 </svg>
@@ -598,7 +591,7 @@
 
                         <!-- Instagram -->
                         <div class="social-item" data-social="instagram">
-                            <a href="https://instagram.com/printf_dj" target="_blank" rel="noopener noreferrer" class="social-btn instagram-hover w-12 h-12 rounded-2xl glass-card border border-slate-300 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200" aria-label="Instagram">
+                            <a href="https://instagram.com/printf_dj" target="_blank" rel="noopener noreferrer" class="social-btn instagram-hover w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-700 dark:text-slate-200 shadow-sm" aria-label="Instagram">
                                 <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                                 </svg>
@@ -612,7 +605,46 @@
 
     </main>
 
-    <footer class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 mt-12 border-t border-slate-300 dark:border-slate-800/60 text-xs font-mono dark:text-slate-400 text-slate-600 flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Interactive CAPTCHA Modal -->
+    <div id="captcha-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/40 dark:bg-slate-950/60 backdrop-blur-md hidden transition-all duration-300">
+        <div class="glass-card max-w-md w-full p-6 sm:p-8 rounded-3xl shadow-2xl relative space-y-6 border border-emerald-500/30 bg-white/70 dark:bg-[#161e31]/80">
+            <button id="close-captcha-btn" class="absolute top-4 right-4 p-2 rounded-full glass-card hover:bg-rose-500/20 text-slate-700 dark:text-slate-300 hover:text-rose-500 transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="space-y-2">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full glass-card text-emerald-600 dark:text-emerald-400 text-xs font-mono shadow-sm">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Security Check
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Verify to Send Email</h3>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">Please solve the security challenge below to open your mail client.</p>
+            </div>
+
+            <div class="p-4 rounded-2xl glass-card flex items-center justify-between border border-emerald-500/25 shadow-sm bg-white/80 dark:bg-slate-900/50">
+                <span id="captcha-question" class="text-base font-mono font-bold text-slate-900 dark:text-emerald-400">5 + 3 = ?</span>
+                <input type="number" id="captcha-answer" class="w-28 px-3.5 py-2.5 rounded-xl glass-card text-center font-mono font-bold text-slate-900 dark:text-white outline-none border border-indigo-200/50 dark:border-white/10 focus:border-emerald-500 dark:focus:border-emerald-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 bg-white/90 dark:bg-slate-900/80" placeholder="Ans" autocomplete="off">
+            </div>
+
+            <div id="captcha-error" class="text-xs text-rose-600 dark:text-rose-400 font-mono hidden">Incorrect answer. Please try again!</div>
+
+            <button id="verify-captcha-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 group">
+                Verify & Open Mail Client <i data-lucide="arrow-right" class="w-4 h-4 ui-arrow"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 glass-card px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-emerald-500/40 translate-y-24 opacity-0 transition-all duration-300">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
+            <i data-lucide="check" class="w-4 h-4"></i>
+        </div>
+        <div>
+            <div class="text-xs font-bold dark:text-white text-slate-900 font-mono">Verified Successfully!</div>
+            <div class="text-xs text-slate-600 dark:text-slate-400">Opening email client to dixitjhinkwan@outlook.in</div>
+        </div>
+    </div>
+
+    <footer class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 mt-12 border-t dark:border-white/10 border-indigo-200/50 text-xs font-mono dark:text-slate-400 text-slate-600 flex flex-col md:flex-row items-center justify-between gap-4">
         <div>© 2026 Dixit Jhinkwan.</div>
         <div class="text-center px-4">
             <span class="italic text-xs font-semibold tracking-wide animated-quote-glow">
@@ -642,29 +674,20 @@
                 name: "Linux", 
                 category: "cloud", 
                 color: "hover:border-amber-400/60 hover:shadow-amber-400/20", 
-                svg: `<div class="w-12 h-12 rounded-xl bg-white border border-amber-300 dark:border-amber-400/50 flex items-center justify-center p-1 shadow-md group-hover:scale-110 transition-transform duration-200">
+                svg: `<div class="w-12 h-12 rounded-xl glass-card flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform duration-200">
                     <svg class="w-9 h-9" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Left Wing -->
                         <path d="M28 62C20 72 16 88 28 98C36 104 42 98 40 86C38 74 34 66 28 62Z" fill="#18181B" stroke="#000" stroke-width="2"/>
-                        <!-- Right Wing -->
                         <path d="M100 62C108 72 112 88 100 98C92 104 86 98 88 86C90 74 94 66 100 62Z" fill="#18181B" stroke="#000" stroke-width="2"/>
-                        <!-- Tux Main Body -->
                         <path d="M64 12C42 12 34 32 34 60C34 76 26 92 22 102C18 112 30 118 44 118C52 118 58 114 64 114C70 114 76 118 84 118C98 118 110 112 106 102C102 92 94 76 94 60C94 32 86 12 64 12Z" fill="#18181B" stroke="#000" stroke-width="3"/>
-                        <!-- Tux White Belly -->
                         <path d="M64 38C50 38 42 54 42 78C42 96 48 110 64 110C80 110 86 96 86 78C86 54 78 38 64 38Z" fill="#FFFFFF"/>
-                        <!-- Feet -->
                         <ellipse cx="40" cy="114" rx="14" ry="6" fill="#F59E0B" stroke="#D97706" stroke-width="2"/>
                         <ellipse cx="88" cy="114" rx="14" ry="6" fill="#F59E0B" stroke="#D97706" stroke-width="2"/>
-                        <!-- Eyes Base -->
                         <ellipse cx="54" cy="34" rx="7" ry="10" fill="#FFFFFF" stroke="#000" stroke-width="1.5"/>
                         <ellipse cx="74" cy="34" rx="7" ry="10" fill="#FFFFFF" stroke="#000" stroke-width="1.5"/>
-                        <!-- Pupils -->
                         <circle cx="56" cy="35" r="3.5" fill="#000000"/>
                         <circle cx="72" cy="35" r="3.5" fill="#000000"/>
-                        <!-- Eye Catchlights -->
                         <circle cx="58" cy="33" r="1.2" fill="#FFFFFF"/>
                         <circle cx="74" cy="33" r="1.2" fill="#FFFFFF"/>
-                        <!-- Classic Beak -->
                         <path d="M50 44 C50 40 78 40 78 44 C78 54 50 54 50 44 Z" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
                         <path d="M54 48 C58 52 70 52 74 48" stroke="#D97706" stroke-width="1.5" fill="none"/>
                     </svg>
@@ -715,7 +738,6 @@
                     iconContent = `<i class="${tech.icon} text-4xl group-hover:scale-110 transition-transform duration-200"></i>`;
                 }
 
-                // Generate star ratings display
                 let starsHTML = "";
                 const totalStars = 5;
                 for (let i = 1; i <= totalStars; i++) {
@@ -739,11 +761,6 @@
                 itemWrapper.appendChild(starsDiv);
                 grid.appendChild(itemWrapper);
             });
-
-            // Release height lock after new content renders
-            requestAnimationFrame(() => {
-                grid.style.minHeight = '';
-            });
         }
 
         function setupFilters() {
@@ -752,11 +769,11 @@
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
                     filterButtons.forEach(b => {
-                        b.classList.remove("bg-emerald-500", "text-white", "font-bold", "shadow-md", "shadow-emerald-500/20", "hover:shadow-emerald-500/40");
-                        b.classList.add("glass-card", "dark:text-slate-300", "text-slate-700", "dark:hover:text-white", "hover:text-emerald-700", "hover:border-emerald-500/50", "hover:shadow-sm");
+                        b.classList.remove("bg-emerald-500", "text-white", "font-bold", "shadow-lg", "shadow-emerald-500/20");
+                        b.classList.add("glass-card", "dark:text-slate-300", "text-slate-700", "dark:hover:text-white", "hover:text-emerald-700");
                     });
-                    btn.classList.add("bg-emerald-500", "text-white", "font-bold", "shadow-md", "shadow-emerald-500/20", "hover:shadow-emerald-500/40");
-                    btn.classList.remove("glass-card", "dark:text-slate-300", "text-slate-700", "dark:hover:text-white", "hover:text-emerald-700", "hover:border-emerald-500/50");
+                    btn.classList.add("bg-emerald-500", "text-white", "font-bold", "shadow-lg", "shadow-emerald-500/20");
+                    btn.classList.remove("glass-card", "dark:text-slate-300", "text-slate-700", "dark:hover:text-white", "hover:text-emerald-700");
 
                     const filterValue = btn.getAttribute("data-filter");
                     populateTechGrid(filterValue);
@@ -813,8 +830,7 @@
                     y: Math.random() * height,
                     vx: (Math.random() - 0.5) * 0.4,
                     vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 2.5 + 1,
-                    baseAlpha: Math.random() * 0.5 + 0.2
+                    radius: Math.random() * 2.5 + 1
                 });
             }
 
@@ -822,7 +838,6 @@
                 ctx.clearRect(0, 0, width, height);
                 const isDark = document.documentElement.classList.contains("dark");
                 
-                // Enhanced particle & web connection colors with higher opacity for light mode
                 ctx.fillStyle = isDark ? "rgba(16, 185, 129, 0.55)" : "rgba(79, 70, 229, 0.85)";
                 ctx.strokeStyle = isDark ? "rgba(52, 211, 153, 0.12)" : "rgba(99, 102, 241, 0.35)";
 
@@ -836,7 +851,6 @@
                     if (p.y < 0) p.y = height;
                     if (p.y > height) p.y = 0;
 
-                    // Mouse repelling physics
                     let dxMouse = mouseX - p.x;
                     let dyMouse = mouseY - p.y;
                     let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
@@ -883,13 +897,11 @@
             });
 
             function updateParallax() {
-                // Smooth interpolation (lerp)
                 currentX += (targetX - currentX) * 0.05;
                 currentY += (targetY - currentY) * 0.05;
 
                 const scrollY = window.scrollY || window.pageYOffset;
 
-                // Parallax on ambient glow orbs based on scroll and cursor
                 if (orb1) {
                     const speed1 = parseFloat(orb1.getAttribute("data-speed") || "0.05");
                     orb1.style.transform = `translate3d(${currentX * speed1 * 0.5}px, ${scrollY * speed1 + currentY * speed1 * 0.5}px, 0)`;
@@ -900,7 +912,6 @@
                     orb2.style.transform = `translate3d(${currentX * speed2 * 0.5}px, ${scrollY * speed2 + currentY * speed2 * 0.5}px, 0)`;
                 }
 
-                // Parallax depth on designated section layers
                 parallaxLayers.forEach((layer) => {
                     const depth = parseFloat(layer.getAttribute("data-parallax-depth") || "20");
                     const moveX = (currentX / window.innerWidth) * depth;
@@ -935,13 +946,11 @@
             const history = document.getElementById("terminal-history");
             const body = document.getElementById("terminal-body");
             const dimLabel = document.getElementById("terminal-dimensions");
-            const matrixCanvas = document.getElementById("terminal-matrix-canvas");
 
             if (!input || !history || !body) return;
 
             let historyList = [];
             let historyIndex = -1;
-            let matrixInterval = null;
 
             function updateDimensions() {
                 if (!dimLabel) return;
@@ -959,80 +968,20 @@
             updateDimensions();
             window.addEventListener("resize", updateDimensions);
 
-            function toggleMatrix(start) {
-                if (!matrixCanvas) return;
-                if (!start) {
-                    matrixCanvas.classList.add("hidden");
-                    if (matrixInterval) clearInterval(matrixInterval);
-                    matrixInterval = null;
-                    return;
-                }
-
-                matrixCanvas.classList.remove("hidden");
-                const mCtx = matrixCanvas.getContext("2d");
-                matrixCanvas.width = body.clientWidth;
-                matrixCanvas.height = body.clientHeight;
-
-                const chars = "0101010101ABCDEFDIXITPRINTF";
-                const fontSize = 12;
-                const columns = Math.floor(matrixCanvas.width / fontSize);
-                const drops = Array(columns).fill(1);
-
-                if (matrixInterval) clearInterval(matrixInterval);
-
-                matrixInterval = setInterval(() => {
-                    mCtx.fillStyle = "rgba(0, 0, 0, 0.08)";
-                    mCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-
-                    mCtx.fillStyle = "#10b981";
-                    mCtx.font = `${fontSize}px monospace`;
-
-                    for (let i = 0; i < drops.length; i++) {
-                        const text = chars.charAt(Math.floor(Math.random() * chars.length));
-                        mCtx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                        if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
-                            drops[i] = 0;
-                        }
-                        drops[i]++;
-                    }
-                }, 33);
-            }
-
             const commands = {
                 whoami: "Dixit Jhinkwan",
                 about: "Frontend Developer & UI Architect based in India 🇮🇳. Specializing in responsive design systems, interactive web applications, and modern frontend stack (JavaScript, AngularJS, Tailwind CSS).",
                 skills: "Frontend: JavaScript, HTML5, CSS3, Tailwind, AngularJS\nBackend: Node.js, Express, C#, Java, MySQL\nTools: Git, GitHub, Linux, Windows, Canva, Photoshop, Premiere Pro",
-                contact: `Email: dixitjhinkwan@outlook.in
-GitHub: https://github.com/printf-dj
-Twitter: https://twitter.com/printf_dj
-LinkedIn: https://linkedin.com/in/dixitjhinkwan`,
+                contact: `Email: dixitjhinkwan@outlook.in\nGitHub: https://github.com/printf-dj\nTwitter: https://twitter.com/printf_dj\nLinkedIn: https://linkedin.com/in/dixitjhinkwan`,
                 experience: "Frontend Developer & UI Engineer\n• Crafting accessible, high-performance web applications\n• Building modular UI component systems\n• Designing media assets & creative visuals",
-                socials: `GitHub: https://github.com/printf-dj
-Twitter: https://twitter.com/printf_dj
-LinkedIn: https://linkedin.com/in/dixitjhinkwan
-Instagram: https://instagram.com/printf_dj`,
-                neofetch: () => `OS: Web / Dixit Linux 6.8.0-printf
-Host: Frontend Portfolio v3.1
-Kernel: JavaScript / ES2026 Engine
-Uptime: Always Online
-Shell: printfDJ-bash 80x24
-UI Stack: JavaScript, Tailwind CSS, AngularJS
-Location: India 🇮🇳`,
+                socials: `GitHub: https://github.com/printf-dj\nTwitter: https://twitter.com/printf_dj\nLinkedIn: https://linkedin.com/in/dixitjhinkwan\nInstagram: https://instagram.com/printf_dj`,
+                neofetch: () => `OS: Web / Dixit Linux 6.8.0-printf\nHost: Frontend Portfolio v3.1\nKernel: JavaScript / ES2026 Engine\nUptime: Always Online\nShell: printfDJ-bash 80x24\nUI Stack: JavaScript, Tailwind CSS, AngularJS\nLocation: India 🇮🇳`,
                 fetch: () => commands.neofetch(),
-                matrix: (args) => {
-                    if (args === "stop") {
-                        toggleMatrix(false);
-                        return "Matrix animation stopped.";
-                    }
-                    toggleMatrix(true);
-                    return "Entering the Matrix... (Type 'matrix stop' or press 'clear' to exit)";
-                },
                 date: () => new Date().toLocaleString(),
                 echo: (args) => args || "",
                 quote: () => "\"In case I don't see ya, good afternoon, good evening, and good night!\" - The Truman Show",
                 sudo: "Permission denied: user 'printfDJ' is already powerful enough.",
-                help: "Available commands:\n  neofetch    - Show developer system info card\n  matrix      - Start digital matrix rain (or 'matrix stop')\n  whoami      - Displays my name\n  about       - Detailed bio and background\n  skills      - List of core competencies & tech stack\n  experience  - Professional overview\n  contact     - Socials & email links\n  socials     - Quick social links\n  date        - Current system time & date\n  quote       - Favorite movie quote\n  theme       - Toggle light/dark mode\n  clear       - Clears the terminal output",
+                help: "Available commands:\n  neofetch    - Show developer system info card\n  whoami      - Displays my name\n  about       - Detailed bio and background\n  skills      - List of core competencies & tech stack\n  experience  - Professional overview\n  contact     - Socials & email links\n  socials     - Quick social links\n  date        - Current system time & date\n  quote       - Favorite movie quote\n  theme       - Toggle light/dark mode\n  clear       - Clears the terminal output",
                 theme: () => {
                     const toggleBtn = document.getElementById("theme-toggle");
                     if (toggleBtn) toggleBtn.click();
@@ -1052,27 +1001,24 @@ Location: India 🇮🇳`,
                 historyIndex = historyList.length;
 
                 const userLine = document.createElement("div");
-                userLine.className = "flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-semibold mt-2";
+                userLine.className = "flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-semibold mt-2 break-all";
                 userLine.innerHTML = `<span>printfDJ@web:~$</span> <span class="text-slate-900 dark:text-white">${rawVal}</span>`;
                 history.appendChild(userLine);
 
                 if (cmd === "clear") {
                     history.innerHTML = "";
-                    toggleMatrix(false);
                     return;
                 }
 
                 const outputLine = document.createElement("div");
-                outputLine.className = "text-slate-800 dark:text-slate-300 whitespace-pre-wrap leading-relaxed pl-2 border-l-2 border-emerald-500/70 my-1 text-base sm:text-lg font-mono";
+                outputLine.className = "text-slate-800 dark:text-slate-300 whitespace-pre-wrap leading-relaxed pl-2 border-l-2 border-emerald-500/70 my-1 text-xs sm:text-base font-mono break-all";
 
                 if (commands[cmd]) {
                     const res = typeof commands[cmd] === "function" ? commands[cmd](args) : commands[cmd];
-                    
-                    // Format links automatically
                     const formattedRes = res.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="text-emerald-500 hover:underline font-bold">$1</a>');
                     outputLine.innerHTML = formattedRes;
                 } else {
-                    outputLine.className = "text-rose-600 dark:text-rose-400 whitespace-pre-wrap pl-2 border-l-2 border-rose-500/70 my-1 text-base sm:text-lg font-mono";
+                    outputLine.className = "text-rose-600 dark:text-rose-400 whitespace-pre-wrap pl-2 border-l-2 border-rose-500/70 my-1 text-xs sm:text-base font-mono break-all";
                     outputLine.textContent = `Command not found: '${rawVal}'. Type 'help' for available commands.`;
                 }
 
@@ -1111,7 +1057,6 @@ Location: India 🇮🇳`,
                 }
             });
 
-            // Handle Quick Action Buttons
             document.querySelectorAll(".term-quick-btn").forEach(btn => {
                 btn.addEventListener("click", () => {
                     const cmdToRun = btn.getAttribute("data-cmd");
@@ -1168,6 +1113,73 @@ Location: India 🇮🇳`,
             });
         }
 
+        function setupCaptcha() {
+            const openBtn = document.getElementById("open-captcha-btn");
+            const modal = document.getElementById("captcha-modal");
+            const closeBtn = document.getElementById("close-captcha-btn");
+            const verifyBtn = document.getElementById("verify-captcha-btn");
+            const answerInput = document.getElementById("captcha-answer");
+            const questionEl = document.getElementById("captcha-question");
+            const errorEl = document.getElementById("captcha-error");
+            const toast = document.getElementById("toast-notification");
+
+            if (!openBtn || !modal) return;
+
+            let num1 = 5, num2 = 3, correctAnswer = 8;
+
+            function generateNewQuestion() {
+                num1 = Math.floor(Math.random() * 8) + 2;
+                num2 = Math.floor(Math.random() * 8) + 1;
+                correctAnswer = num1 + num2;
+                if (questionEl) questionEl.textContent = `${num1} + ${num2} = ?`;
+                if (answerInput) answerInput.value = "";
+                if (errorEl) errorEl.classList.add("hidden");
+            }
+
+            openBtn.addEventListener("click", () => {
+                generateNewQuestion();
+                modal.classList.remove("hidden");
+                if (answerInput) answerInput.focus();
+            });
+
+            closeBtn.addEventListener("click", () => {
+                modal.classList.add("hidden");
+            });
+
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.classList.add("hidden");
+                }
+            });
+
+            function verifyAndSubmit() {
+                const userAns = parseInt(answerInput.value.trim(), 10);
+                if (userAns === correctAnswer) {
+                    modal.classList.add("hidden");
+                    
+                    toast.classList.remove("translate-y-24", "opacity-0");
+                    setTimeout(() => {
+                        toast.classList.add("translate-y-24", "opacity-0");
+                    }, 4000);
+
+                    window.location.href = "mailto:dixitjhinkwan@outlook.in";
+                } else {
+                    if (errorEl) errorEl.classList.remove("hidden");
+                    if (answerInput) {
+                        answerInput.value = "";
+                        answerInput.focus();
+                    }
+                }
+            }
+
+            verifyBtn.addEventListener("click", verifyAndSubmit);
+            answerInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    verifyAndSubmit();
+                }
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             populateTechGrid();
             setupFilters();
@@ -1177,20 +1189,12 @@ Location: India 🇮🇳`,
             initParallaxEffects();
             setupThemeToggle();
             setupMobileMenu();
+            setupCaptcha();
 
             if (window.lucide) {
                 lucide.createIcons();
             }
         });
     </script>
-    <style>
-        /* ... existing code ... --> */
-        /* Make terminal pre/ascii-art smaller, crisper, and non-wrapping */
-        .terminal-ascii {
-            font-size: 9px;
-            line-height: 1.1;
-            letter-spacing: -0.5px;
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            white-space: pre;
-            overflow-x: auto;
-        }
+</body>
+</html>
