@@ -55,6 +55,14 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
 
         .dark body {
@@ -63,13 +71,21 @@
         }
 
         html:not(.dark) body {
-            background-color: #eef2ff;
+            background-color: #f0f4ff;
             color: #0f172a;
+        }
+
+        /* Prevent canvas and absolute ambient orbs from creating horizontal scrollbars */
+        #bg-canvas {
+            max-width: 100vw;
+            overflow: hidden;
         }
 
         .glass-card {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+            will-change: transform;
         }
 
         .dark .glass-card {
@@ -79,21 +95,63 @@
         }
 
         html:not(.dark) .glass-card {
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(203, 213, 225, 0.8);
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.06);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(165, 180, 252, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.12);
         }
 
         .dark .glass-card-hover:hover {
             background: rgba(51, 65, 85, 0.85);
             border-color: rgba(52, 211, 153, 0.5);
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.01);
         }
 
         html:not(.dark) .glass-card-hover:hover {
             background: rgba(255, 255, 255, 1);
-            border-color: rgba(99, 102, 241, 0.4);
-            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.6);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        /* Ambient floating glow animation */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.08); }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(30px) scale(0.95); }
+        }
+
+        .bg-glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(130px);
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+        }
+
+        .dark .bg-glow-orb {
+            opacity: 0.25;
+        }
+
+        html:not(.dark) .bg-glow-orb {
+            opacity: 0.55;
+        }
+
+        #orb-1 {
+            animation: float-slow 14s ease-in-out infinite;
+        }
+
+        #orb-2 {
+            animation: float-reverse 18s ease-in-out infinite;
+        }
+
+        /* Parallax layer wrapper class */
+        .parallax-layer {
+            will-change: transform;
+            transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
         }
 
         .text-gradient {
@@ -118,15 +176,6 @@
         html:not(.dark) ::-webkit-scrollbar-thumb {
             background: #94a3b8;
             border-radius: 4px;
-        }
-
-        .bg-glow-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.2;
         }
 
         .terminal-shadow {
@@ -273,10 +322,10 @@
 
     <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
 
-    <div id="orb-1" class="bg-glow-orb w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-emerald-400 dark:bg-emerald-500 top-[-100px] left-[-100px]"></div>
-    <div id="orb-2" class="bg-glow-orb w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-indigo-400 dark:bg-indigo-600 top-[25%] right-[-150px]"></div>
+    <div id="orb-1" class="bg-glow-orb w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-emerald-400 dark:bg-emerald-500 top-[-100px] left-[-100px]" data-speed="0.05"></div>
+    <div id="orb-2" class="bg-glow-orb w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-indigo-500 dark:bg-indigo-600 top-[25%] right-[-150px]" data-speed="-0.04"></div>
 
-    <header class="fixed top-0 left-0 right-0 z-50 py-3 px-3 sm:px-6 md:px-12 w-full flex justify-center pointer-events-none" id="navbar">
+    <header class="fixed top-0 left-0 right-0 z-50 py-3 px-2 sm:px-6 md:px-12 w-full max-w-[100vw] overflow-x-hidden flex justify-center pointer-events-none" id="navbar">
         <div class="w-full max-w-7xl mx-auto flex items-center justify-between glass-card px-3 sm:px-6 py-2.5 rounded-full border border-slate-300 dark:border-slate-800/80 shadow-sm relative pointer-events-auto">
             <a href="#hero" class="flex items-center space-x-2 group shrink-0">
                 <span class="font-mono text-xs sm:text-sm tracking-wider font-semibold">
@@ -315,7 +364,7 @@
 
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-24 sm:pt-28 space-y-20 md:space-y-24 w-full overflow-x-hidden">
 
-        <section id="hero" class="min-h-[70vh] flex flex-col justify-center items-center text-center pt-2">
+        <section id="hero" class="min-h-[70vh] flex flex-col justify-center items-center text-center pt-2 parallax-layer" data-parallax-depth="15">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-6">
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 Available for frontend & UI collaborations
@@ -513,36 +562,71 @@
 
     <script>
         const technologies = [
-            { name: "JavaScript", category: "frontend", icon: "devicon-javascript-plain colored", rating: 5 },
-            { name: "HTML5", category: "frontend", icon: "devicon-html5-plain colored", rating: 5 },
-            { name: "CSS3", category: "frontend", icon: "devicon-css3-plain colored", rating: 5 },
-            { name: "Tailwind CSS", category: "frontend", icon: "devicon-tailwindcss-original colored", rating: 5 },
-            { name: "AngularJS", category: "frontend", icon: "devicon-angularjs-plain colored", rating: 4 },
-            { name: "Node.js", category: "backend", icon: "devicon-nodejs-plain colored", rating: 4 },
-            { name: "Express.js", category: "backend", icon: "devicon-express-original", rating: 4 },
-            { name: "C#", category: "backend", icon: "devicon-csharp-plain colored", rating: 4 },
-            { name: "Java", category: "backend", icon: "devicon-java-plain colored", rating: 4 },
-            { name: "MySQL", category: "backend", icon: "devicon-mysql-plain colored", rating: 4 },
-            { name: "Git", category: "cloud", icon: "devicon-git-plain colored", rating: 5 },
-            { name: "GitHub", category: "cloud", icon: "devicon-github-original", rating: 5 },
-            { name: "Linux", category: "cloud", icon: "devicon-linux-plain", rating: 4 },
-            { name: "Windows", category: "cloud", icon: "devicon-windows11-plain colored", rating: 5 },
+            { name: "JavaScript", category: "frontend", icon: "devicon-javascript-plain colored", color: "hover:border-yellow-400/60 hover:shadow-yellow-400/20", rating: 5 },
+            { name: "HTML5", category: "frontend", icon: "devicon-html5-plain colored", color: "hover:border-orange-500/60 hover:shadow-orange-500/20", rating: 5 },
+            { name: "CSS3", category: "frontend", icon: "devicon-css3-plain colored", color: "hover:border-blue-500/60 hover:shadow-blue-500/20", rating: 5 },
+            { name: "Tailwind CSS", category: "frontend", icon: "devicon-tailwindcss-original colored", color: "hover:border-cyan-400/60 hover:shadow-cyan-400/20", rating: 5 },
+            { name: "AngularJS", category: "frontend", icon: "devicon-angularjs-plain colored", color: "hover:border-red-500/60 hover:shadow-red-500/20", rating: 4 },
+            { name: "Node.js", category: "backend", icon: "devicon-nodejs-plain colored", color: "hover:border-green-500/60 hover:shadow-green-500/20", rating: 4 },
+            { name: "Express.js", category: "backend", icon: "devicon-express-original dark:invert-0", color: "hover:border-slate-400/60 hover:shadow-slate-400/20", rating: 4 },
+            { name: "C#", category: "backend", icon: "devicon-csharp-plain colored", color: "hover:border-purple-500/60 hover:shadow-purple-500/20", rating: 4 },
+            { name: "Java", category: "backend", icon: "devicon-java-plain colored", color: "hover:border-red-600/60 hover:shadow-red-600/20", rating: 4 },
+            { name: "MySQL", category: "backend", icon: "devicon-mysql-plain colored", color: "hover:border-blue-600/60 hover:shadow-blue-600/20", rating: 4 },
+            { name: "Git", category: "cloud", icon: "devicon-git-plain colored", color: "hover:border-orange-600/60 hover:shadow-orange-600/20", rating: 5 },
+            { name: "GitHub", category: "cloud", icon: "devicon-github-original dark:invert-0", color: "hover:border-purple-400/60 hover:shadow-purple-400/20", rating: 5 },
+            { 
+                name: "Linux", 
+                category: "cloud", 
+                color: "hover:border-amber-400/60 hover:shadow-amber-400/20", 
+                svg: `<div class="w-12 h-12 rounded-xl bg-white border border-amber-300 dark:border-amber-400/50 flex items-center justify-center p-1 shadow-md group-hover:scale-110 transition-transform duration-200">
+                    <svg class="w-9 h-9" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Left Wing -->
+                        <path d="M28 62C20 72 16 88 28 98C36 104 42 98 40 86C38 74 34 66 28 62Z" fill="#18181B" stroke="#000" stroke-width="2"/>
+                        <!-- Right Wing -->
+                        <path d="M100 62C108 72 112 88 100 98C92 104 86 98 88 86C90 74 94 66 100 62Z" fill="#18181B" stroke="#000" stroke-width="2"/>
+                        <!-- Tux Main Body -->
+                        <path d="M64 12C42 12 34 32 34 60C34 76 26 92 22 102C18 112 30 118 44 118C52 118 58 114 64 114C70 114 76 118 84 118C98 118 110 112 106 102C102 92 94 76 94 60C94 32 86 12 64 12Z" fill="#18181B" stroke="#000" stroke-width="3"/>
+                        <!-- Tux White Belly -->
+                        <path d="M64 38C50 38 42 54 42 78C42 96 48 110 64 110C80 110 86 96 86 78C86 54 78 38 64 38Z" fill="#FFFFFF"/>
+                        <!-- Feet -->
+                        <ellipse cx="40" cy="114" rx="14" ry="6" fill="#F59E0B" stroke="#D97706" stroke-width="2"/>
+                        <ellipse cx="88" cy="114" rx="14" ry="6" fill="#F59E0B" stroke="#D97706" stroke-width="2"/>
+                        <!-- Eyes Base -->
+                        <ellipse cx="54" cy="34" rx="7" ry="10" fill="#FFFFFF" stroke="#000" stroke-width="1.5"/>
+                        <ellipse cx="74" cy="34" rx="7" ry="10" fill="#FFFFFF" stroke="#000" stroke-width="1.5"/>
+                        <!-- Pupils -->
+                        <circle cx="56" cy="35" r="3.5" fill="#000000"/>
+                        <circle cx="72" cy="35" r="3.5" fill="#000000"/>
+                        <!-- Eye Catchlights -->
+                        <circle cx="58" cy="33" r="1.2" fill="#FFFFFF"/>
+                        <circle cx="74" cy="33" r="1.2" fill="#FFFFFF"/>
+                        <!-- Classic Beak -->
+                        <path d="M50 44 C50 40 78 40 78 44 C78 54 50 54 50 44 Z" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+                        <path d="M54 48 C58 52 70 52 74 48" stroke="#D97706" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </div>`,
+                rating: 4 
+            },
+            { name: "Windows", category: "cloud", icon: "devicon-windows11-original colored", color: "hover:border-sky-400/60 hover:shadow-sky-400/20", rating: 5 },
             { 
                 name: "Premiere Pro", 
                 category: "design", 
-                svg: `<div class="w-12 h-12 rounded-xl bg-[#00005b] text-[#9999ff] font-bold flex items-center justify-center text-lg shadow-inner border border-[#3030b7]">Pr</div>`, 
+                color: "hover:border-indigo-500/60 hover:shadow-indigo-500/20",
+                svg: `<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00005b] to-[#120078] text-[#9999ff] font-extrabold flex items-center justify-center text-xl shadow-md border border-[#3030b7] group-hover:scale-110 transition-transform duration-200">Pr</div>`, 
                 rating: 4 
             },
             { 
                 name: "Photoshop", 
                 category: "design", 
-                svg: `<div class="w-12 h-12 rounded-xl bg-[#001e36] text-[#31a8ff] font-bold flex items-center justify-center text-lg shadow-inner border border-[#0086ff]">Ps</div>`, 
+                color: "hover:border-sky-500/60 hover:shadow-sky-500/20",
+                svg: `<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#001e36] to-[#003459] text-[#31a8ff] font-extrabold flex items-center justify-center text-xl shadow-md border border-[#0086ff] group-hover:scale-110 transition-transform duration-200">Ps</div>`, 
                 rating: 4 
             },
             { 
                 name: "Canva", 
                 category: "design", 
                 icon: "devicon-canva-original colored", 
+                color: "hover:border-teal-400/60 hover:shadow-teal-400/20",
                 rating: 5 
             }
         ];
@@ -566,18 +650,19 @@
                 itemWrapper.className = "skill-item-wrapper";
 
                 const card = document.createElement("div");
-                card.className = "glass-card glass-card-hover p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 cursor-pointer group";
+                const colorGlow = tech.color || "hover:border-emerald-500/60 hover:shadow-emerald-500/20";
+                card.className = `glass-card glass-card-hover p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 cursor-pointer group transition-all duration-300 ${colorGlow}`;
                 
                 let starsHTML = "";
                 for (let i = 0; i < 5; i++) {
-                    starsHTML += `<span class="${i < tech.rating ? 'text-amber-400' : 'text-slate-500'}">★</span>`;
+                    starsHTML += `<span class="${i < tech.rating ? 'text-amber-400 drop-shadow-[0_0_3px_rgba(251,191,36,0.6)]' : 'text-slate-500/40'}">★</span>`;
                 }
 
-                const iconContent = tech.svg ? tech.svg : `<div class="w-12 h-12 rounded-xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-200"><i class="${tech.icon}"></i></div>`;
+                const iconContent = tech.svg ? tech.svg : `<div class="w-12 h-12 rounded-xl flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-200 drop-shadow-md"><i class="${tech.icon}"></i></div>`;
 
                 card.innerHTML = `
                     ${iconContent}
-                    <span class="text-xs sm:text-sm font-medium dark:text-slate-200 text-slate-800 text-center">${tech.name}</span>
+                    <span class="text-xs sm:text-sm font-semibold dark:text-slate-100 text-slate-800 text-center tracking-wide">${tech.name}</span>
                 `;
 
                 const starsDiv = document.createElement("div");
@@ -638,30 +723,42 @@
             if (!canvas) return;
             const ctx = canvas.getContext("2d");
 
-            let width = (canvas.width = window.innerWidth);
+            let width = (canvas.width = document.documentElement.clientWidth || window.innerWidth);
             let height = (canvas.height = window.innerHeight);
 
+            let mouseX = width / 2;
+            let mouseY = height / 2;
+
             window.addEventListener("resize", () => {
-                width = canvas.width = window.innerWidth;
+                width = canvas.width = document.documentElement.clientWidth || window.innerWidth;
                 height = canvas.height = window.innerHeight;
             });
 
+            window.addEventListener("mousemove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
             const particles = [];
-            for (let i = 0; i < 25; i++) {
+            const count = window.innerWidth < 768 ? 25 : 55;
+            for (let i = 0; i < count; i++) {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.2,
-                    vy: (Math.random() - 0.5) * 0.2,
-                    radius: Math.random() * 1.5 + 1
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    radius: Math.random() * 2.5 + 1,
+                    baseAlpha: Math.random() * 0.5 + 0.2
                 });
             }
 
             function loop() {
                 ctx.clearRect(0, 0, width, height);
                 const isDark = document.documentElement.classList.contains("dark");
-                ctx.fillStyle = isDark ? "rgba(16, 185, 129, 0.2)" : "rgba(99, 102, 241, 0.2)";
-                ctx.strokeStyle = isDark ? "rgba(16, 185, 129, 0.04)" : "rgba(99, 102, 241, 0.04)";
+                
+                // Enhanced particle & web connection colors with higher opacity for light mode
+                ctx.fillStyle = isDark ? "rgba(16, 185, 129, 0.55)" : "rgba(79, 70, 229, 0.85)";
+                ctx.strokeStyle = isDark ? "rgba(52, 211, 153, 0.12)" : "rgba(99, 102, 241, 0.35)";
 
                 for (let i = 0; i < particles.length; i++) {
                     let p = particles[i];
@@ -673,6 +770,15 @@
                     if (p.y < 0) p.y = height;
                     if (p.y > height) p.y = 0;
 
+                    // Mouse repelling physics
+                    let dxMouse = mouseX - p.x;
+                    let dyMouse = mouseY - p.y;
+                    let distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                    if (distMouse < 140) {
+                        p.x -= (dxMouse / distMouse) * 0.8;
+                        p.y -= (dyMouse / distMouse) * 0.8;
+                    }
+
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                     ctx.fill();
@@ -683,8 +789,8 @@
                         let dy = p.y - p2.y;
                         let dist = Math.sqrt(dx * dx + dy * dy);
 
-                        if (dist < 100) {
-                            ctx.lineWidth = 1 - dist / 100;
+                        if (dist < 130) {
+                            ctx.lineWidth = (1 - dist / 130) * (isDark ? 1.2 : 1.6);
                             ctx.beginPath();
                             ctx.moveTo(p.x, p.y);
                             ctx.lineTo(p2.x, p2.y);
@@ -695,6 +801,51 @@
                 requestAnimationFrame(loop);
             }
             loop();
+        }
+
+        function initParallaxEffects() {
+            const orb1 = document.getElementById("orb-1");
+            const orb2 = document.getElementById("orb-2");
+            const parallaxLayers = document.querySelectorAll(".parallax-layer");
+
+            let targetX = 0, targetY = 0;
+            let currentX = 0, currentY = 0;
+
+            window.addEventListener("mousemove", (e) => {
+                targetX = (e.clientX - window.innerWidth / 2);
+                targetY = (e.clientY - window.innerHeight / 2);
+            });
+
+            function updateParallax() {
+                // Smooth interpolation (lerp)
+                currentX += (targetX - currentX) * 0.05;
+                currentY += (targetY - currentY) * 0.05;
+
+                const scrollY = window.scrollY || window.pageYOffset;
+
+                // Parallax on ambient glow orbs based on scroll and cursor
+                if (orb1) {
+                    const speed1 = parseFloat(orb1.getAttribute("data-speed") || "0.05");
+                    orb1.style.transform = `translate3d(${currentX * speed1 * 0.5}px, ${scrollY * speed1 + currentY * speed1 * 0.5}px, 0)`;
+                }
+
+                if (orb2) {
+                    const speed2 = parseFloat(orb2.getAttribute("data-speed") || "-0.04");
+                    orb2.style.transform = `translate3d(${currentX * speed2 * 0.5}px, ${scrollY * speed2 + currentY * speed2 * 0.5}px, 0)`;
+                }
+
+                // Parallax depth on designated section layers
+                parallaxLayers.forEach((layer) => {
+                    const depth = parseFloat(layer.getAttribute("data-parallax-depth") || "20");
+                    const moveX = (currentX / window.innerWidth) * depth;
+                    const moveY = (currentY / window.innerHeight) * depth;
+                    layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+                });
+
+                requestAnimationFrame(updateParallax);
+            }
+
+            updateParallax();
         }
 
         function setupThemeToggle() {
@@ -789,6 +940,7 @@
             setupLogoHover();
             setupTerminal();
             initCanvasParticles();
+            initParallaxEffects();
             setupThemeToggle();
             setupMobileMenu();
 
