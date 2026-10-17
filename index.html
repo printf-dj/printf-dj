@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dixit Jhinkwan | Frontend Developer & UI Architect</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%2210%22 fill=%22%2310b981%22/><text x=%2216%22 y=%2222%22 font-family=%22monospace%22 font-size=%2214%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>DJ</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%2212%22 fill=%22%2310b981%22/><text x=%2216%22 y=%2222%22 font-family=%22monospace%22 font-size=%2214%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>DJ</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -311,23 +311,33 @@
 
         .skill-item-wrapper {
             position: relative;
-            padding-bottom: 24px;
+            padding-bottom: 20px;
         }
         .skill-stars {
             position: absolute;
             bottom: 2px;
             left: 50%;
-            transform: translateX(-50%) translateY(4px);
+            transform: translateX(-50%) translateY(3px);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease, transform 0.2s ease;
             white-space: nowrap;
-            font-size: 0.8rem;
-            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
         }
         .skill-item-wrapper:hover .skill-stars {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* Equal skill icon box dimensions */
+        .skill-box {
+            width: 100%;
+            height: 104px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -356,6 +366,14 @@
                 </nav>
 
                 <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                    <button id="reduce-motion-toggle" class="px-2.5 sm:px-3 py-1.5 rounded-full glass-card flex items-center space-x-1.5 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer text-xs font-mono font-semibold" title="Toggle Reduce Motion">
+                        <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-500"></i>
+                        <span>Motion:</span>
+                        <span id="motion-indicator" class="inline-flex items-center">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 font-bold" id="motion-icon"></i>
+                        </span>
+                    </button>
+
                     <button id="theme-toggle" class="px-2.5 sm:px-3 py-1.5 rounded-full glass-card flex items-center space-x-1 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer" title="Toggle Theme">
                         <i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block text-amber-400"></i>
                         <i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden text-indigo-600"></i>
@@ -380,7 +398,7 @@
 
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-20 sm:pt-24 space-y-16 sm:space-y-20 md:space-y-24 w-full overflow-x-hidden">
 
-        <section id="hero" class="min-h-[75vh] sm:min-h-[70vh] flex flex-col justify-center items-center text-center pt-2 pb-6 parallax-layer" data-parallax-depth="15">
+        <section id="hero" class="min-h-[62vh] sm:min-h-[65vh] flex flex-col justify-center items-center text-center pt-2 pb-4 parallax-layer" data-parallax-depth="15">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-4 sm:mb-6 shadow-md">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 Available for frontend & UI collaborations
@@ -395,7 +413,7 @@
                 A passionate <span class="dark:text-white text-slate-900 font-semibold underline decoration-emerald-500 underline-offset-4">Frontend Developer</span> from India 🇮🇳 crafting sleek, responsive, and performance-driven web interfaces.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 mb-4 sm:mb-8">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 mb-2 sm:mb-6">
                 <a href="#tech" class="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-xl hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 group">
                     Explore Skills <i data-lucide="sparkles" class="w-4 h-4 ui-arrow"></i>
                 </a>
@@ -659,7 +677,8 @@
     </div>
 
     <footer class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 mt-12 border-t dark:border-white/10 border-indigo-200/50 text-xs font-mono dark:text-slate-400 text-slate-600 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div>© 2026 Dixit Jhinkwan.</div>
+        <div>Last Updated: 17:10:2026 21:25 IST
+        </div>
         <div class="text-center px-4">
             <span class="italic text-xs font-semibold tracking-wide animated-quote-glow">
                 "In case I don't see ya, good afternoon, good evening, and good night!"
@@ -672,24 +691,24 @@
 
     <script>
         const technologies = [
-            { name: "JavaScript", category: "frontend", icon: "devicon-javascript-plain colored", color: "hover:border-yellow-400/60 hover:shadow-yellow-400/20", rating: 5 },
-            { name: "HTML5", category: "frontend", icon: "devicon-html5-plain colored", color: "hover:border-orange-500/60 hover:shadow-orange-500/20", rating: 5 },
-            { name: "CSS3", category: "frontend", icon: "devicon-css3-plain colored", color: "hover:border-blue-500/60 hover:shadow-blue-500/20", rating: 5 },
-            { name: "Tailwind CSS", category: "frontend", icon: "devicon-tailwindcss-original colored", color: "hover:border-cyan-400/60 hover:shadow-cyan-400/20", rating: 5 },
-            { name: "AngularJS", category: "frontend", icon: "devicon-angularjs-plain colored", color: "hover:border-red-500/60 hover:shadow-red-500/20", rating: 4 },
-            { name: "Node.js", category: "backend", icon: "devicon-nodejs-plain colored", color: "hover:border-green-500/60 hover:shadow-green-500/20", rating: 4 },
-            { name: "Express.js", category: "backend", icon: "devicon-express-original dark:invert-0", color: "hover:border-slate-400/60 hover:shadow-slate-400/20", rating: 4 },
-            { name: "C#", category: "backend", icon: "devicon-csharp-plain colored", color: "hover:border-purple-500/60 hover:shadow-purple-500/20", rating: 4 },
-            { name: "Java", category: "backend", icon: "devicon-java-plain colored", color: "hover:border-red-600/60 hover:shadow-red-600/20", rating: 4 },
-            { name: "MySQL", category: "backend", icon: "devicon-mysql-plain colored", color: "hover:border-blue-600/60 hover:shadow-blue-600/20", rating: 4 },
-            { name: "Git", category: "cloud", icon: "devicon-git-plain colored", color: "hover:border-orange-600/60 hover:shadow-orange-600/20", rating: 5 },
-            { name: "GitHub", category: "cloud", icon: "devicon-github-original dark:invert-0", color: "hover:border-purple-400/60 hover:shadow-purple-400/20", rating: 5 },
+            { name: "JavaScript", category: "frontend", icon: "devicon-javascript-plain colored", color: "hover:border-yellow-400/60 hover:shadow-yellow-400/20", rating: 3 },
+            { name: "HTML5", category: "frontend", icon: "devicon-html5-plain colored", color: "hover:border-orange-500/60 hover:shadow-orange-500/20", rating: 4 },
+            { name: "CSS3", category: "frontend", icon: "devicon-css3-plain colored", color: "hover:border-blue-500/60 hover:shadow-blue-500/20", rating: 3.5 },
+            { name: "Tailwind CSS", category: "frontend", icon: "devicon-tailwindcss-original colored", color: "hover:border-cyan-400/60 hover:shadow-cyan-400/20", rating: 3 },
+            { name: "AngularJS", category: "frontend", icon: "devicon-angularjs-plain colored", color: "hover:border-red-500/60 hover:shadow-red-500/20", rating: 3 },
+            { name: "Node.js", category: "backend", icon: "devicon-nodejs-plain colored", color: "hover:border-green-500/60 hover:shadow-green-500/20", rating: 2 },
+            { name: "Express.js", category: "backend", icon: "devicon-express-original dark:invert-0", color: "hover:border-slate-400/60 hover:shadow-slate-400/20", rating: 2.5 },
+            { name: "C#", category: "backend", icon: "devicon-csharp-plain colored", color: "hover:border-purple-500/60 hover:shadow-purple-500/20", rating: 3 },
+            { name: "Java", category: "backend", icon: "devicon-java-plain colored", color: "hover:border-red-600/60 hover:shadow-red-600/20", rating: 3 },
+            { name: "MySQL", category: "backend", icon: "devicon-mysql-plain colored", color: "hover:border-blue-600/60 hover:shadow-blue-600/20", rating: 2.5 },
+            { name: "Git", category: "cloud", icon: "devicon-git-plain colored", color: "hover:border-orange-600/60 hover:shadow-orange-600/20", rating: 3 },
+            { name: "GitHub", category: "cloud", icon: "devicon-github-original dark:invert-0", color: "hover:border-purple-400/60 hover:shadow-purple-400/20", rating: 3 },
             { 
                 name: "Linux", 
                 category: "cloud", 
                 color: "hover:border-amber-400/60 hover:shadow-amber-400/20", 
-                svg: `<div class="w-12 h-12 rounded-xl glass-card flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform duration-200">
-                    <svg class="w-9 h-9" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                svg: `<div class="w-10 h-10 rounded-xl glass-card flex items-center justify-center p-1 shadow-sm group-hover:scale-110 transition-transform duration-200">
+                    <svg class="w-8 h-8" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M28 62C20 72 16 88 28 98C36 104 42 98 40 86C38 74 34 66 28 62Z" fill="#18181B" stroke="#000" stroke-width="2"/>
                         <path d="M100 62C108 72 112 88 100 98C92 104 86 98 88 86C90 74 94 66 100 62Z" fill="#18181B" stroke="#000" stroke-width="2"/>
                         <path d="M64 12C42 12 34 32 34 60C34 76 26 92 22 102C18 112 30 118 44 118C52 118 58 114 64 114C70 114 76 118 84 118C98 118 110 112 106 102C102 92 94 76 94 60C94 32 86 12 64 12Z" fill="#18181B" stroke="#000" stroke-width="3"/>
@@ -706,29 +725,29 @@
                         <path d="M54 48 C58 52 70 52 74 48" stroke="#D97706" stroke-width="1.5" fill="none"/>
                     </svg>
                 </div>`,
-                rating: 4 
+                rating: 3 
             },
-            { name: "Windows", category: "cloud", icon: "devicon-windows11-original colored", color: "hover:border-sky-400/60 hover:shadow-sky-400/20", rating: 5 },
+            { name: "Windows", category: "cloud", icon: "devicon-windows11-original colored", color: "hover:border-sky-400/60 hover:shadow-sky-400/20", rating: 4 },
             { 
                 name: "Premiere Pro", 
                 category: "design", 
                 color: "hover:border-indigo-500/60 hover:shadow-indigo-500/20",
-                svg: `<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00005b] to-[#120078] text-[#9999ff] font-extrabold flex items-center justify-center text-xl shadow-md border border-[#3030b7] group-hover:scale-110 transition-transform duration-200">Pr</div>`, 
-                rating: 4 
+                svg: `<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00005b] to-[#120078] text-[#9999ff] font-extrabold flex items-center justify-center text-base shadow-md border border-[#3030b7] group-hover:scale-110 transition-transform duration-200">Pr</div>`, 
+                rating: 3 
             },
             { 
                 name: "Photoshop", 
                 category: "design", 
                 color: "hover:border-sky-500/60 hover:shadow-sky-500/20",
-                svg: `<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#001e36] to-[#003459] text-[#31a8ff] font-extrabold flex items-center justify-center text-xl shadow-md border border-[#0086ff] group-hover:scale-110 transition-transform duration-200">Ps</div>`, 
-                rating: 4 
+                svg: `<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#001e36] to-[#003459] text-[#31a8ff] font-extrabold flex items-center justify-center text-base shadow-md border border-[#0086ff] group-hover:scale-110 transition-transform duration-200">Ps</div>`, 
+                rating: 3.5 
             },
             { 
                 name: "Canva", 
                 category: "design", 
                 icon: "devicon-canva-original colored", 
                 color: "hover:border-teal-400/60 hover:shadow-teal-400/20",
-                rating: 5 
+                rating: 4 
             }
         ];
 
@@ -743,13 +762,13 @@
                 itemWrapper.className = "skill-item-wrapper";
 
                 const card = document.createElement("div");
-                card.className = `glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center space-y-3 cursor-pointer group transition-all duration-200 border border-slate-300 dark:border-slate-800 ${tech.color}`;
+                card.className = `glass-card glass-card-hover p-4 rounded-2xl skill-box cursor-pointer group transition-all duration-200 border border-slate-300 dark:border-slate-800 ${tech.color}`;
 
                 let iconContent = "";
                 if (tech.svg) {
                     iconContent = tech.svg;
                 } else if (tech.icon) {
-                    iconContent = `<i class="${tech.icon} text-4xl group-hover:scale-110 transition-transform duration-200"></i>`;
+                    iconContent = `<i class="${tech.icon} text-3xl group-hover:scale-110 transition-transform duration-200"></i>`;
                 }
 
                 let starsHTML = "";
@@ -764,7 +783,7 @@
 
                 card.innerHTML = `
                     ${iconContent}
-                    <span class="text-xs sm:text-sm font-semibold dark:text-slate-100 text-slate-800 text-center tracking-wide">${tech.name}</span>
+                    <span class="text-xs sm:text-sm font-semibold dark:text-slate-100 text-slate-800 text-center tracking-wide mt-2">${tech.name}</span>
                 `;
 
                 const starsDiv = document.createElement("div");
@@ -825,6 +844,7 @@
 
             let mouseX = width / 2;
             let mouseY = height / 2;
+            let activeAnimation = true;
 
             window.addEventListener("resize", () => {
                 width = canvas.width = document.documentElement.clientWidth || window.innerWidth;
@@ -844,7 +864,7 @@
             }, { passive: true });
 
             const particles = [];
-            const count = window.innerWidth < 768 ? 25 : 55;
+            const count = window.innerWidth < 768 ? 25 : 50;
             for (let i = 0; i < count; i++) {
                 particles.push({
                     x: Math.random() * width,
@@ -856,6 +876,12 @@
             }
 
             function loop() {
+                if (!activeAnimation) {
+                    ctx.clearRect(0, 0, width, height);
+                    requestAnimationFrame(loop);
+                    return;
+                }
+
                 ctx.clearRect(0, 0, width, height);
                 const isDark = document.documentElement.classList.contains("dark");
                 
@@ -902,6 +928,33 @@
                 requestAnimationFrame(loop);
             }
             loop();
+
+            const reduceMotionBtn = document.getElementById("reduce-motion-toggle");
+            const motionIndicator = document.getElementById("motion-indicator");
+            if (reduceMotionBtn && motionIndicator) {
+                function updateMotionUI() {
+                    if (activeAnimation) {
+                        motionIndicator.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 font-bold"></i>`;
+                    } else {
+                        motionIndicator.innerHTML = `<i data-lucide="x" class="w-3.5 h-3.5 text-rose-500 font-bold"></i>`;
+                    }
+                    if (window.lucide) {
+                        lucide.createIcons();
+                    }
+                }
+
+                reduceMotionBtn.addEventListener("click", () => {
+                    activeAnimation = !activeAnimation;
+                    updateMotionUI();
+                    localStorage.setItem('reduceMotion', !activeAnimation);
+                });
+
+                const storedMotion = localStorage.getItem('reduceMotion');
+                if (storedMotion === 'true') {
+                    activeAnimation = false;
+                }
+                updateMotionUI();
+            }
         }
 
         function initParallaxEffects() {
