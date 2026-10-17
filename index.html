@@ -276,8 +276,8 @@
     <div id="orb-1" class="bg-glow-orb w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-emerald-400 dark:bg-emerald-500 top-[-100px] left-[-100px]"></div>
     <div id="orb-2" class="bg-glow-orb w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-indigo-400 dark:bg-indigo-600 top-[25%] right-[-150px]"></div>
 
-    <header class="fixed top-0 left-0 right-0 z-50 py-3 px-3 sm:px-6 md:px-12 w-full flex justify-center" id="navbar">
-        <div class="w-full max-w-7xl mx-auto flex items-center justify-between glass-card px-4 sm:px-6 py-2.5 rounded-full border border-slate-300 dark:border-slate-800/80 shadow-sm relative">
+    <header class="fixed top-0 left-0 right-0 z-50 py-3 px-3 sm:px-6 md:px-12 w-full flex justify-center pointer-events-none" id="navbar">
+        <div class="w-full max-w-7xl mx-auto flex items-center justify-between glass-card px-3 sm:px-6 py-2.5 rounded-full border border-slate-300 dark:border-slate-800/80 shadow-sm relative pointer-events-auto">
             <a href="#hero" class="flex items-center space-x-2 group shrink-0">
                 <span class="font-mono text-xs sm:text-sm tracking-wider font-semibold">
                     <span class="text-emerald-600 dark:text-emerald-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-200" id="logo-printf">printf</span><span class="text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-200" id="logo-dj">("dj")</span>
@@ -291,20 +291,20 @@
                 <a href="#contact" class="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5"><i data-lucide="mail" class="w-4 h-4"></i> Connect</a>
             </nav>
 
-            <div class="flex items-center space-x-2 shrink-0">
-                <button id="theme-toggle" class="px-3 py-1.5 rounded-full glass-card border border-slate-300 dark:border-slate-800/60 flex items-center space-x-1 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer" title="Toggle Theme">
+            <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                <button id="theme-toggle" class="px-2.5 sm:px-3 py-1.5 rounded-full glass-card border border-slate-300 dark:border-slate-800/60 flex items-center space-x-1 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer" title="Toggle Theme">
                     <i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block text-amber-400"></i>
                     <i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden text-indigo-600"></i>
                     <span id="theme-label" class="text-xs font-mono font-semibold tracking-wider text-indigo-600 dark:text-emerald-400">Light</span>
                 </button>
 
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full glass-card border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none" aria-label="Toggle Menu">
+                <button id="mobile-menu-btn" class="md:hidden p-1.5 sm:p-2 rounded-full glass-card border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-200 focus:outline-none" aria-label="Toggle Menu">
                     <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
                 </button>
             </div>
 
             <!-- Mobile Drawer Menu -->
-            <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 mt-3 glass-card rounded-2xl border border-slate-300 dark:border-slate-800 shadow-xl p-4 flex flex-col space-y-3 font-medium text-sm">
+            <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 mt-2 glass-card rounded-2xl border border-slate-300 dark:border-slate-800 shadow-xl p-3 flex flex-col space-y-2 font-medium text-sm">
                 <a href="#about" class="mobile-link px-3 py-2 rounded-xl hover:bg-emerald-500/10 flex items-center gap-2 text-slate-700 dark:text-slate-200"><i data-lucide="user" class="w-4 h-4 text-emerald-500"></i> About</a>
                 <a href="#tech" class="mobile-link px-3 py-2 rounded-xl hover:bg-emerald-500/10 flex items-center gap-2 text-slate-700 dark:text-slate-200"><i data-lucide="cpu" class="w-4 h-4 text-emerald-500"></i> Tech Stack</a>
                 <a href="#terminal" class="mobile-link px-3 py-2 rounded-xl hover:bg-emerald-500/10 flex items-center gap-2 text-slate-700 dark:text-slate-200"><i data-lucide="terminal" class="w-4 h-4 text-emerald-500"></i> Console</a>
@@ -551,6 +551,12 @@
             const grid = document.getElementById("tech-grid");
             if (!grid) return;
 
+            // Lock container height temporarily to prevent page scroll jumping on category change
+            const currentHeight = grid.getBoundingClientRect().height;
+            if (currentHeight > 0) {
+                grid.style.minHeight = `${currentHeight}px`;
+            }
+
             grid.innerHTML = "";
 
             const filtered = filter === "all" ? technologies : technologies.filter(t => t.category === filter);
@@ -582,12 +588,18 @@
                 itemWrapper.appendChild(starsDiv);
                 grid.appendChild(itemWrapper);
             });
+
+            // Release height lock after new content renders
+            requestAnimationFrame(() => {
+                grid.style.minHeight = '';
+            });
         }
 
         function setupFilters() {
             const filterButtons = document.querySelectorAll(".filter-btn");
             filterButtons.forEach(btn => {
-                btn.addEventListener("click", () => {
+                btn.addEventListener("click", (e) => {
+                    e.preventDefault();
                     filterButtons.forEach(b => {
                         b.classList.remove("bg-emerald-500", "text-white", "font-bold", "shadow-sm", "hover:text-white");
                         b.classList.add("glass-card", "dark:text-slate-300", "text-slate-700", "hover:text-emerald-500");
