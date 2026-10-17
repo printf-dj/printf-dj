@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dixit Jhinkwan | Frontend Developer & UI Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />      
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        (function() {
+            try {
+                const storedTheme = localStorage.getItem('theme');
+                if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {
+                console.warn('System theme preference check skipped:', e);
+            }
+        })();
+
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        obsidian: {
+                            base: '#0f172a',
+                            card: '#1e293b',
+                            cardHover: '#334155',
+                            border: '#334155',
+                            accent: '#10B981',
+                            accentLight: '#34D399',
+                            electric: '#6366F1',
+                            violet: '#A855F7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        @keyframes waveHand {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .wave-emoji {
+            display: inline-block;
+            transform-origin: 70% 70%;
+            animation: waveHand 2.2s infinite;
+        }
+
+        .dark body {
+            background-color: #0b132b;
+            color: #f1f5f9;
+        }
+
+        html:not(.dark) body {
+            background-color: #eef2ff;
+            color: #0f172a;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.35);
+        }
+
+        html:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(203, 213, 225, 0.8);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.06);
+        }
+
+        .dark .glass-card-hover:hover {
+            background: rgba(51, 65, 85, 0.85);
+            border-color: rgba(52, 211, 153, 0.5);
+            box-shadow: 0 16px 35px -10px rgba(16, 185, 129, 0.25);
+            transform: translateY(-3px);
+        }
+
+        html:not(.dark) .glass-card-hover:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 16px 35px -10px rgba(99, 102, 241, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #34d399 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #0b132b;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        html:not(.dark) ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+
+        .bg-glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.25;
+        }
+
+        .terminal-shadow {
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.15);
+        }
+
+        .social-btn {
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+        
+        .social-btn svg {
+            transition: color 0.2s ease;
+        }
+
+        .github-hover:hover {
+            background-color: #0f172a !important;
+            border-color: #0f172a !important;
+            transform: translateY(-3px);
+        }
+        .github-hover:hover svg {
+            color: #ffffff !important;
+        }
+
+        .twitter-hover:hover {
+            background-color: #1DA1F2 !important;
+            border-color: #1DA1F2 !important;
+            transform: translateY(-3px);
+        }
+        .twitter-hover:hover svg {
+            color: #ffffff !important;
+        }
+
+        .linkedin-hover:hover {
+            background-color: #0A66C2 !important;
+            border-color: #0A66C2 !important;
+            transform: translateY(-3px);
+        }
+        .linkedin-hover:hover svg {
+            color: #ffffff !important;
+        }
+
+        .instagram-hover:hover {
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045) !important;
+            border-color: #fd1d1d !important;
+            transform: translateY(-3px);
+        }
+        .instagram-hover:hover svg {
+            color: #ffffff !important;
+        }
+
+        .email-hover:hover {
+            background-color: #0d9488 !important;
+            border-color: #0d9488 !important;
+            transform: translateY(-3px);
+        }
+        .email-hover:hover svg {
+            color: #ffffff !important;
+        }
+
+        @keyframes runningGlowAlternate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .dark .animated-quote-glow {
+            background: linear-gradient(
+                90deg,
+                #34d399 0%,
+                #818cf8 33%,
+                #c084fc 66%,
+                #f472b6 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: runningGlowAlternate 1.0s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+        }
+
+        html:not(.dark) .animated-quote-glow {
+            background: linear-gradient(
+                90deg,
+                #0f172a 0%,
+                #2563eb 50%,
+                #7e22ce 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: runningGlowAlternate 1.0s ease-in-out infinite alternate;
+        }
+
+        .social-item {
+            position: relative;
+        }
+        .social-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.8rem;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0;
+        }
+        .social-item[data-social="email"] .social-label { color: #14b8a6; }
+        .social-item[data-social="github"] .social-label { color: #64748b; }
+        .social-item[data-social="twitter"] .social-label { color: #0284c7; }
+        .social-item[data-social="linkedin"] .social-label { color: #0284c7; }
+        .social-item[data-social="instagram"] .social-label { color: #db2777; }
+
+        .social-item:hover .social-label {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .skill-item-wrapper {
+            position: relative;
+            padding-bottom: 26px;
+        }
+        .skill-stars {
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+        .skill-item-wrapper:hover .skill-stars {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @keyframes bounceSpring {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.08); }
+            70% { transform: scale(0.96); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-bounce-spring {
+            animation: bounceSpring 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <canvas id="bg-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <div id="orb-1" class="bg-glow-orb w-[350px] md:w-[550px] h-[350px] md:h-[550px] bg-emerald-400 dark:bg-emerald-500 top-[-100px] left-[-100px]"></div>
+    <div id="orb-2" class="bg-glow-orb w-[450px] md:w-[650px] h-[450px] md:h-[650px] bg-indigo-400 dark:bg-indigo-600 top-[25%] right-[-150px]"></div>
+    <div id="orb-3" class="bg-glow-orb w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-purple-400 dark:bg-purple-600 bottom-[10%] left-[-100px]"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 py-3 px-4 sm:px-6 md:px-12" id="navbar">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass-card px-4 sm:px-6 py-2.5 rounded-full border border-slate-300 dark:border-slate-800/80 shadow-sm">
+            <a href="#hero" class="flex items-center space-x-2 group">
+                <span class="font-mono text-xs tracking-wider font-semibold">
+                    <span class="text-emerald-600 dark:text-emerald-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-200" id="logo-printf">printf</span><span class="text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-200" id="logo-dj">("dj")</span>
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium dark:text-slate-300 text-slate-700">
+                <a href="#about" class="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5"><i data-lucide="user" class="w-4 h-4"></i> About</a>
+                <a href="#tech" class="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5"><i data-lucide="cpu" class="w-4 h-4"></i> Tech Stack</a>
+                <a href="#terminal" class="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5"><i data-lucide="terminal" class="w-4 h-4"></i> Console</a>
+                <a href="#contact" class="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5"><i data-lucide="mail" class="w-4 h-4"></i> Connect</a>
+            </nav>
+
+            <div class="flex items-center space-x-2">
+                <button id="theme-toggle" class="px-3.5 py-1.5 rounded-full glass-card border border-slate-300 dark:border-slate-800/60 flex items-center space-x-1.5 shadow-sm active:scale-95 transition-transform duration-200 cursor-pointer" title="Toggle Theme">
+                    <i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block text-amber-400"></i>
+                    <i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden text-indigo-600"></i>
+                    <span id="theme-label" class="text-xs font-mono font-semibold tracking-wider text-indigo-600 dark:text-emerald-400">Light</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-28 sm:pt-32 space-y-20 md:space-y-24">
+
+        <section id="hero" class="min-h-[75vh] flex flex-col justify-center items-center text-center pt-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-card border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-6 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                Available for frontend & UI collaborations
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-tight">
+                <span id="greeting-text" class="inline-block pr-1">Hi</span> <span class="wave-emoji">👋</span>, <br />
+                I'm <span class="text-gradient">Dixit Jhinkwan</span>
+            </h1>
+
+            <p class="text-base sm:text-lg md:text-2xl dark:text-slate-300 text-slate-700 max-w-2xl font-light mb-8 sm:mb-10 leading-relaxed px-2">
+                A passionate <span class="dark:text-white text-slate-900 font-semibold underline decoration-emerald-500 underline-offset-4">Frontend Developer</span> from India 🇮🇳 crafting sleek, responsive, and performance-driven web interfaces.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 mb-12">
+                <a href="#tech" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm tracking-wide shadow-lg shadow-indigo-500/20 hover:scale-105 transition-transform duration-200 flex items-center justify-center gap-2">
+                    Explore Skills <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </a>
+                <a href="#terminal" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass-card hover:bg-slate-200/50 dark:hover:bg-white/10 dark:text-slate-200 text-slate-800 font-semibold text-sm tracking-wide border dark:border-slate-800 border-slate-300 hover:border-emerald-500/50 transition-colors duration-200 flex items-center justify-center gap-2">
+                    Launch Interactive CLI <i data-lucide="terminal" class="w-4 h-4 text-emerald-500"></i>
+                </a>
+            </div>
+
+            <div class="animate-bounce mt-4 dark:text-slate-500 text-slate-400 hidden sm:flex flex-col items-center gap-2">
+                <span class="text-xs font-mono uppercase tracking-widest">Scroll Down</span>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-emerald-500"></i>
+            </div>
+        </section>
+
+        <section id="about" class="space-y-6 sm:space-y-8 scroll-mt-28">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-slate-800/80 border-slate-300 pb-4">
+                <div>
+                    <h2 class="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">// Profile & Philosophy</h2>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 mt-1">Design Systems & Clean Code</h3>
+                </div>
+                <div class="dark:text-slate-400 text-slate-600 text-xs sm:text-sm font-mono">
+                    Based in India • Open for Global Projects
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 glass-card glass-card-hover p-6 sm:p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-4">
+                            <i data-lucide="code-2" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-xl sm:text-2xl font-bold dark:text-white text-slate-900">Modern Frontend & Interactive Engineering</h4>
+                        <p class="dark:text-slate-300 text-slate-600 leading-relaxed font-normal text-sm sm:text-base">
+                            Focused on refined user interface details, dynamic animation systems, high-speed responsiveness, and robust application architecture. Dedicated to producing pixel-perfect frontend experiences backed by modern web standards.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t dark:border-slate-800/80 border-slate-200 flex flex-wrap gap-2.5 text-xs font-mono dark:text-slate-400 text-slate-600">
+                        <span class="px-3 py-1.5 rounded-lg dark:bg-slate-900/90 bg-slate-100 border dark:border-slate-800 border-slate-300 text-emerald-600 dark:text-emerald-400 font-semibold">⚡ Performance Optimized</span>
+                        <span class="px-3 py-1.5 rounded-lg dark:bg-slate-900/90 bg-slate-100 border dark:border-slate-800 border-slate-300 text-indigo-600 dark:text-indigo-400 font-semibold">🎨 Modern UI Design</span>
+                        <span class="px-3 py-1.5 rounded-lg dark:bg-slate-900/90 bg-slate-100 border dark:border-slate-800 border-slate-300 text-purple-600 dark:text-purple-400 font-semibold">🛠 Robust Tech Stack</span>
+                    </div>
+                </div>
+
+                <div class="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6">
+                    <h4 class="text-lg sm:text-xl font-bold dark:text-white text-slate-900 flex items-center gap-2">
+                        <i data-lucide="zap" class="w-5 h-5 text-amber-500"></i> Core Focus
+                    </h4>
+
+                    <div class="space-y-4">
+                        <div class="p-3.5 sm:p-4 rounded-2xl dark:bg-slate-900/70 bg-slate-100/90 border dark:border-slate-800/80 border-slate-200">
+                            <div class="text-xs dark:text-slate-400 text-slate-500 font-mono">Primary Frontend</div>
+                            <div class="text-sm sm:text-base font-semibold text-emerald-600 dark:text-emerald-400 mt-1">JavaScript / AngularJS / Tailwind</div>
+                        </div>
+                        <div class="p-3.5 sm:p-4 rounded-2xl dark:bg-slate-900/70 bg-slate-100/90 border dark:border-slate-800/80 border-slate-200">
+                            <div class="text-xs dark:text-slate-400 text-slate-500 font-mono">Backend Stack</div>
+                            <div class="text-sm sm:text-base font-semibold text-indigo-600 dark:text-indigo-400 mt-1">Node.js, C#, Java, MySQL</div>
+                        </div>
+                        <div class="p-3.5 sm:p-4 rounded-2xl dark:bg-slate-900/70 bg-slate-100/90 border dark:border-slate-800/80 border-slate-200">
+                            <div class="text-xs dark:text-slate-400 text-slate-500 font-mono">Creative Tools</div>
+                            <div class="text-sm sm:text-base font-semibold text-purple-600 dark:text-purple-400 mt-1">Premiere Pro, Photoshop, Canva</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="space-y-6 sm:space-y-8 scroll-mt-28">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 border-b dark:border-slate-800/80 border-slate-300 pb-5">
+                <div class="space-y-2">
+                    <h2 class="text-xs font-mono text-indigo-600 dark:text-indigo-400 uppercase tracking-widest">// Toolbox & Ecosystem</h2>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 leading-tight">Languages & Technologies</h3>
+                    <p class="text-xs dark:text-slate-400 text-slate-600">Hover or tap any card to view proficiency ratings.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 w-full md:w-auto" id="tech-filters">
+                    <button data-filter="all" class="filter-btn active animate-bounce-spring px-3.5 sm:px-4 py-2 rounded-full text-xs font-mono bg-emerald-500 text-white font-bold transition-all shadow-md cursor-pointer">All</button>
+                    <button data-filter="frontend" class="filter-btn px-3.5 sm:px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 hover:text-emerald-500 transition-all border border-slate-300 dark:border-slate-800/60 cursor-pointer">Frontend</button>
+                    <button data-filter="backend" class="filter-btn px-3.5 sm:px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 hover:text-emerald-500 transition-all border border-slate-300 dark:border-slate-800/60 cursor-pointer">Backend & DB</button>
+                    <button data-filter="cloud" class="filter-btn px-3.5 sm:px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 hover:text-emerald-500 transition-all border border-slate-300 dark:border-slate-800/60 cursor-pointer">Cloud & Tools</button>
+                    <button data-filter="design" class="filter-btn px-3.5 sm:px-4 py-2 rounded-full text-xs font-mono glass-card dark:text-slate-300 text-slate-700 hover:text-emerald-500 transition-all border border-slate-300 dark:border-slate-800/60 cursor-pointer">Media & Design</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5 pt-2 pb-4" id="tech-grid">
+                <!-- Populated via JavaScript -->
+            </div>
+        </section>
+
+        <section id="terminal" class="space-y-6 sm:space-y-8 scroll-mt-28">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 border-b dark:border-slate-800/80 border-slate-300 pb-4">
+                <div>
+                    <h2 class="text-xs font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">// Interactive Console</h2>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold dark:text-slate-100 text-slate-900 mt-1">Dixit's Shell Terminal</h3>
+                </div>
+                <div class="dark:text-slate-400 text-slate-600 text-xs font-mono">
+                    Type <span class="text-emerald-500 dark:text-emerald-400 font-bold">help</span> to view commands
+                </div>
+            </div>
+
+            <div class="w-full rounded-2xl dark:bg-[#070b14] bg-slate-900 border border-emerald-500/35 font-mono text-xs sm:text-sm terminal-shadow overflow-hidden text-slate-200">
+                <div class="bg-slate-950/90 px-4 py-3 flex items-center justify-between border-b border-slate-800">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                        <span class="text-xs text-slate-400 ml-2 font-mono">bash - dixit@dev</span>
+                    </div>
+                    <div class="text-xs text-slate-500 hidden sm:block">UTF-8</div>
+                </div>
+
+                <div id="terminal-body" class="p-4 sm:p-6 h-72 sm:h-80 overflow-y-auto space-y-3 text-slate-300">
+                    <div class="text-emerald-400 font-semibold">Welcome to Dixit's Interactive Console v3.0.0</div>
+                    <div class="text-slate-400 text-xs">Type <span class="text-emerald-300">'help'</span> for list of commands, <span class="text-emerald-300">'skills'</span>, <span class="text-emerald-300">'socials'</span>, or <span class="text-emerald-300">'clear'</span>.</div>
+                    <div id="terminal-history" class="space-y-3"></div>
+                </div>
+
+                <div class="bg-black/80 px-4 sm:px-6 py-3 border-t border-slate-800 flex items-center gap-2">
+                    <span class="text-indigo-400 font-bold">dixit@dev:~$</span>
+                    <input type="text" id="terminal-input" class="bg-transparent border-none outline-none flex-1 text-emerald-300 font-mono text-xs sm:text-sm focus:ring-0" placeholder="Type command..." autocomplete="off">
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="space-y-6 sm:space-y-8 scroll-mt-28">
+            <div class="glass-card p-6 sm:p-10 md:p-14 rounded-3xl border border-indigo-500/20 relative overflow-hidden text-center space-y-6">
+                <div class="max-w-2xl mx-auto space-y-3 sm:space-y-4">
+                    <h2 class="text-2xl sm:text-3xl md:text-5xl font-extrabold dark:text-white text-slate-900 tracking-tight">
+                        Let's Connect & Collaborate
+                    </h2>
+                    <p class="dark:text-slate-300 text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">
+                        Have a project in mind, want to discuss modern web technologies, or just say hi? Connect with me on my socials or drop me an email!
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-4 pb-2">
+                    <div class="social-item" data-social="email">
+                        <a href="mailto:dixitjhinkwan@outlook.in?subject=came%20from%20website" aria-label="Email Dixit" class="social-btn email-hover p-3.5 sm:p-4 rounded-2xl glass-card border border-teal-300 dark:border-teal-500/30 shadow-md flex items-center justify-center cursor-pointer" title="Email">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-600 dark:text-teal-400 transition-colors duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </a>
+                        <span class="social-label">Email</span>
+                    </div>
+
+                    <div class="social-item" data-social="github">
+                        <a href="https://github.com/printf-dj" target="_blank" aria-label="GitHub Profile" class="social-btn github-hover p-3.5 sm:p-4 rounded-2xl glass-card border border-slate-300 dark:border-slate-700/50 shadow-md flex items-center justify-center cursor-pointer">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-slate-900 dark:text-white transition-colors duration-200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </a>
+                        <span class="social-label">GitHub</span>
+                    </div>
+
+                    <div class="social-item" data-social="twitter">
+                        <a href="https://twitter.com/printf_dj" target="_blank" aria-label="Twitter Profile" class="social-btn twitter-hover p-3.5 sm:p-4 rounded-2xl glass-card border border-sky-300 dark:border-sky-500/30 shadow-md flex items-center justify-center cursor-pointer">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1DA1F2] dark:text-sky-400 transition-colors duration-200" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.936 9.936 0 0024 4.59z"/></svg>
+                        </a>
+                        <span class="social-label">Twitter</span>
+                    </div>
+
+                    <div class="social-item" data-social="linkedin">
+                        <a href="https://linkedin.com/in/dixitjhinkwan" target="_blank" aria-label="LinkedIn Profile" class="social-btn linkedin-hover p-3.5 sm:p-4 rounded-2xl glass-card border border-blue-300 dark:border-indigo-500/30 shadow-md flex items-center justify-center cursor-pointer">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#0A66C2] dark:text-indigo-400 transition-colors duration-200" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.729C24 .774 23.205 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <span class="social-label">LinkedIn</span>
+                    </div>
+
+                    <div class="social-item" data-social="instagram">
+                        <a href="https://instagram.com/printf_dj" target="_blank" aria-label="Instagram Profile" class="social-btn instagram-hover p-3.5 sm:p-4 rounded-2xl glass-card border border-pink-300 dark:border-pink-500/30 shadow-md flex items-center justify-center cursor-pointer">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-pink-500 transition-colors duration-200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <span class="social-label">Instagram</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 mt-12 border-t border-slate-300 dark:border-slate-800/60 text-xs font-mono dark:text-slate-400 text-slate-600 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>© 2026 Dixit Jhinkwan.</div>
+        <div class="text-center px-4">
+            <span class="italic text-xs font-semibold tracking-wide animated-quote-glow">
+                "In case I don't see ya, good afternoon, good evening, and good night!"
+            </span>
+        </div>
+        <div class="flex items-center gap-2">
+            Vibecoded with <i data-lucide="heart" class="w-3.5 h-3.5 text-emerald-500 fill-emerald-500"></i>
+        </div>
+    </footer>
+
+    <script>
+        const technologies = [
+            { name: "JavaScript", category: "frontend", icon: "devicon-javascript-plain colored", rating: 5 },
+            { name: "HTML5", category: "frontend", icon: "devicon-html5-plain colored", rating: 5 },
+            { name: "CSS3", category: "frontend", icon: "devicon-css3-plain colored", rating: 5 },
+            { name: "Tailwind CSS", category: "frontend", icon: "devicon-tailwindcss-original colored", rating: 5 },
+            { name: "AngularJS", category: "frontend", icon: "devicon-angularjs-plain colored", rating: 4 },
+            { name: "Node.js", category: "backend", icon: "devicon-nodejs-plain colored", rating: 4 },
+            { name: "Express.js", category: "backend", icon: "devicon-express-original", rating: 4 },
+            { name: "C#", category: "backend", icon: "devicon-csharp-plain colored", rating: 4 },
+            { name: "Java", category: "backend", icon: "devicon-java-plain colored", rating: 4 },
+            { name: "MySQL", category: "backend", icon: "devicon-mysql-plain colored", rating: 4 },
+            { name: "Git", category: "cloud", icon: "devicon-git-plain colored", rating: 5 },
+            { name: "GitHub", category: "cloud", icon: "devicon-github-original", rating: 5 },
+            { name: "Linux", category: "cloud", icon: "devicon-linux-plain", rating: 4 },
+            { name: "Windows", category: "cloud", icon: "devicon-windows11-plain colored", rating: 5 },
+            { 
+                name: "Premiere Pro", 
+                category: "design", 
+                svg: `<div class="w-12 h-12 rounded-xl bg-[#00005b] text-[#9999ff] font-bold flex items-center justify-center text-lg shadow-inner border border-[#3030b7]">Pr</div>`, 
+                rating: 4 
+            },
+            { 
+                name: "Photoshop", 
+                category: "design", 
+                svg: `<div class="w-12 h-12 rounded-xl bg-[#001e36] text-[#31a8ff] font-bold flex items-center justify-center text-lg shadow-inner border border-[#0086ff]">Ps</div>`, 
+                rating: 4 
+            },
+            { 
+                name: "Canva", 
+                category: "design", 
+                icon: "devicon-canva-original colored", 
+                rating: 5 
+            }
+        ];
+
+        function populateTechGrid(filter = "all") {
+            const grid = document.getElementById("tech-grid");
+            if (!grid) return;
+
+            grid.innerHTML = "";
+
+            const filtered = filter === "all" ? technologies : technologies.filter(t => t.category === filter);
+
+            filtered.forEach((tech) => {
+                const itemWrapper = document.createElement("div");
+                itemWrapper.className = "skill-item-wrapper";
+
+                const card = document.createElement("div");
+                card.className = "glass-card glass-card-hover p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center space-y-3 cursor-pointer group";
+                
+                let starsHTML = "";
+                for (let i = 0; i < 5; i++) {
+                    starsHTML += `<span class="${i < tech.rating ? 'text-amber-400' : 'text-slate-500'}">★</span>`;
+                }
+
+                const iconContent = tech.svg ? tech.svg : `<div class="w-12 h-12 rounded-xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform duration-200"><i class="${tech.icon}"></i></div>`;
+
+                card.innerHTML = `
+                    ${iconContent}
+                    <span class="text-xs sm:text-sm font-medium dark:text-slate-200 text-slate-800 text-center">${tech.name}</span>
+                `;
+
+                const starsDiv = document.createElement("div");
+                starsDiv.className = "skill-stars text-xs tracking-wider flex items-center justify-center";
+                starsDiv.innerHTML = starsHTML;
+
+                itemWrapper.appendChild(card);
+                itemWrapper.appendChild(starsDiv);
+                grid.appendChild(itemWrapper);
+            });
+        }
+
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            filterButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    filterButtons.forEach(b => {
+                        b.classList.remove("bg-emerald-500", "text-white", "font-bold", "shadow-md", "animate-bounce-spring");
+                        b.classList.add("glass-card", "dark:text-slate-300", "text-slate-700");
+                    });
+                    btn.classList.add("bg-emerald-500", "text-white", "font-bold", "shadow-md", "animate-bounce-spring");
+                    btn.classList.remove("glass-card", "dark:text-slate-300", "text-slate-700");
+
+                    const filterValue = btn.getAttribute("data-filter");
+                    populateTechGrid(filterValue);
+                });
+            });
+        }
+
+        function setupLogoHover() {
+            const printfSpan = document.getElementById("logo-printf");
+            const djSpan = document.getElementById("logo-dj");
+            const logoLink = printfSpan ? printfSpan.closest('a') : null;
+
+            if (!logoLink || !printfSpan || !djSpan) return;
+
+            logoLink.addEventListener("mouseenter", () => {
+                const isDark = document.documentElement.classList.contains("dark");
+                printfSpan.style.color = isDark ? "#ffffff" : "#000000";
+                djSpan.style.color = isDark ? "#34d399" : "#10b981";
+            });
+
+            logoLink.addEventListener("mouseleave", () => {
+                const isDark = document.documentElement.classList.contains("dark");
+                printfSpan.style.color = isDark ? "#34d399" : "#059669";
+                djSpan.style.color = isDark ? "#ffffff" : "#0f172a";
+            });
+        }
+
+        function initCanvasParticles() {
+            const canvas = document.getElementById("bg-canvas");
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+
+            let width = (canvas.width = window.innerWidth);
+            let height = (canvas.height = window.innerHeight);
+
+            window.addEventListener("resize", () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            for (let i = 0; i < 30; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    radius: Math.random() * 1.5 + 1
+                });
+            }
+
+            function loop() {
+                ctx.clearRect(0, 0, width, height);
+                const isDark = document.documentElement.classList.contains("dark");
+                ctx.fillStyle = isDark ? "rgba(16, 185, 129, 0.25)" : "rgba(99, 102, 241, 0.25)";
+                ctx.strokeStyle = isDark ? "rgba(16, 185, 129, 0.05)" : "rgba(99, 102, 241, 0.05)";
+
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let p2 = particles[j];
+                        let dx = p.x - p2.x;
+                        let dy = p.y - p2.y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 110) {
+                            ctx.lineWidth = 1 - dist / 110;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        function setupThemeToggle() {
+            const toggleBtn = document.getElementById("theme-toggle");
+            const themeLabel = document.getElementById("theme-label");
+
+            if (!toggleBtn || !themeLabel) return;
+
+            const initialIsDark = document.documentElement.classList.contains("dark");
+            themeLabel.textContent = initialIsDark ? "Light" : "Dark";
+
+            toggleBtn.addEventListener("click", () => {
+                const isDark = document.documentElement.classList.toggle("dark");
+                themeLabel.textContent = isDark ? "Light" : "Dark";
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        }
+
+        function setupTerminal() {
+            const input = document.getElementById("terminal-input");
+            const history = document.getElementById("terminal-history");
+            const body = document.getElementById("terminal-body");
+
+            if (!input || !history || !body) return;
+
+            const commands = {
+                help: "Available commands:\n • <span class='text-emerald-400'>about</span>: Overview of my profile\n • <span class='text-emerald-400'>skills</span>: List key technologies\n • <span class='text-emerald-400'>socials</span>: Get social handles\n • <span class='text-emerald-400'>clear</span>: Wipe terminal logs",
+                about: "Dixit Jhinkwan — Frontend Developer from India 🇮🇳 specializing in sleek, user-centric web applications and design systems.",
+                skills: "Primary Stack: JavaScript, AngularJS, Tailwind CSS, Node.js, Express, C#, Java, MySQL.",
+                socials: "GitHub: github.com/printf-dj\nTwitter: twitter.com/printf_dj\nLinkedIn: linkedin.com/in/dixitjhinkwan",
+            };
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    const value = input.value.trim().toLowerCase();
+                    if (!value) return;
+
+                    const commandLine = document.createElement("div");
+                    commandLine.className = "flex items-center gap-2 text-indigo-300 font-semibold";
+                    commandLine.innerHTML = `<span class="text-emerald-400">dixit@dev:~$</span> <span>${value}</span>`;
+                    history.appendChild(commandLine);
+
+                    if (value === "clear") {
+                        history.innerHTML = "";
+                    } else if (commands[value]) {
+                        const response = document.createElement("div");
+                        response.className = "text-slate-300 pl-4 border-l-2 border-emerald-500/40 my-1 whitespace-pre-line text-xs sm:text-sm";
+                        response.innerHTML = commands[value];
+                        history.appendChild(response);
+                    } else {
+                        const errorMsg = document.createElement("div");
+                        errorMsg.className = "text-rose-400 pl-4 border-l-2 border-rose-500/40 my-1 text-xs sm:text-sm";
+                        errorMsg.textContent = `Command not recognized: '${value}'. Type 'help' for options.`;
+                        history.appendChild(errorMsg);
+                    }
+
+                    input.value = "";
+                    body.scrollTop = body.scrollHeight;
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            populateTechGrid();
+            setupFilters();
+            setupLogoHover();
+            setupTerminal();
+            initCanvasParticles();
+            setupThemeToggle();
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
