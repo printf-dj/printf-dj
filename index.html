@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dixit Jhinkwan | Frontend Developer & UI Architect</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%2310b981%22/><text x=%2216%22 y=%2222%22 font-family=%22monospace%22 font-size=%2214%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>DJ</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%2210%22 fill=%22%2310b981%22/><text x=%2216%22 y=%2222%22 font-family=%22monospace%22 font-size=%2214%22 font-weight=%22bold%22 fill=%22%23ffffff%22 text-anchor=%22middle%22>DJ</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +58,8 @@
             overflow-x: hidden;
             width: 100%;
             max-width: 100vw;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
         }
 
         /* Hide scrollbar completely across all browsers and devices */
@@ -82,6 +84,7 @@
             overflow-x: hidden;
             width: 100%;
             max-width: 100vw;
+            scroll-behavior: smooth;
         }
 
         .dark body {
@@ -269,7 +272,7 @@
         }
         .social-label {
             position: absolute;
-            bottom: -28px;
+            bottom: -22px;
             left: 50%;
             transform: translateX(-50%) translateY(4px);
             opacity: 0;
@@ -283,6 +286,7 @@
             border: none !important;
             box-shadow: none !important;
             padding: 0;
+            max-width: 90vw;
         }
         .social-item[data-social="email"] .social-label { color: #14b8a6; }
         .social-item[data-social="github"] .social-label { color: #64748b; }
@@ -290,9 +294,19 @@
         .social-item[data-social="linkedin"] .social-label { color: #0284c7; }
         .social-item[data-social="instagram"] .social-label { color: #db2777; }
 
+        @media (max-width: 640px) {
+            .social-item:nth-child(1) .social-label { left: 0; transform: translateY(4px); }
+            .social-item:nth-child(4) .social-label { left: auto; right: 0; transform: translateY(4px); }
+        }
+
         .social-item:hover .social-label {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .social-item:nth-child(1):hover .social-label { transform: translateY(0); }
+            .social-item:nth-child(4):hover .social-label { transform: translateY(0); }
         }
 
         .skill-item-wrapper {
@@ -364,24 +378,24 @@
         </div>
     </header>
 
-    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-24 sm:pt-28 space-y-20 md:space-y-24 w-full overflow-x-hidden">
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-20 sm:pt-24 space-y-16 sm:space-y-20 md:space-y-24 w-full overflow-x-hidden">
 
-        <section id="hero" class="min-h-[70vh] flex flex-col justify-center items-center text-center pt-2 parallax-layer" data-parallax-depth="15">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-6 shadow-md">
+        <section id="hero" class="min-h-[75vh] sm:min-h-[70vh] flex flex-col justify-center items-center text-center pt-2 pb-6 parallax-layer" data-parallax-depth="15">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-4 sm:mb-6 shadow-md">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 Available for frontend & UI collaborations
             </div>
 
-            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-tight drop-shadow-sm">
+            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-4 sm:mb-6 leading-tight drop-shadow-sm">
                 Hi <span class="wave-emoji">👋</span>, <br />
                 I'm <span class="text-gradient">Dixit Jhinkwan</span>
             </h1>
 
-            <p class="text-base sm:text-lg md:text-xl dark:text-slate-300 text-slate-700 max-w-2xl font-light mb-8 leading-relaxed px-2">
+            <p class="text-sm sm:text-lg md:text-xl dark:text-slate-300 text-slate-700 max-w-2xl font-light mb-6 sm:mb-8 leading-relaxed px-2">
                 A passionate <span class="dark:text-white text-slate-900 font-semibold underline decoration-emerald-500 underline-offset-4">Frontend Developer</span> from India 🇮🇳 crafting sleek, responsive, and performance-driven web interfaces.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 mb-8">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto px-4 mb-4 sm:mb-8">
                 <a href="#tech" class="w-full sm:w-auto px-7 py-3 rounded-full bg-gradient-to-r from-emerald-500 via-indigo-600 to-purple-600 text-white font-semibold text-sm shadow-xl hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 group">
                     Explore Skills <i data-lucide="sparkles" class="w-4 h-4 ui-arrow"></i>
                 </a>
@@ -548,7 +562,7 @@
                 </div>
 
                 <!-- Social Presence Grid -->
-                <div class="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6">
+                <div class="glass-card glass-card-hover p-6 sm:p-8 rounded-3xl flex flex-col justify-between space-y-6 pb-8 sm:pb-8">
                     <div class="space-y-2">
                         <h4 class="text-xl font-bold dark:text-white text-slate-900 flex items-center gap-2">
                             <i data-lucide="share-2" class="w-5 h-5 text-indigo-500"></i> Online Presence
@@ -558,7 +572,7 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <div class="flex flex-wrap items-center gap-4 pt-2 pb-1">
                         <!-- GitHub -->
                         <div class="social-item" data-social="github">
                             <a href="https://github.com/printf-dj" target="_blank" rel="noopener noreferrer" class="social-btn github-hover w-12 h-12 rounded-2xl glass-card flex items-center justify-center text-slate-700 dark:text-slate-200 shadow-sm" aria-label="GitHub">
@@ -815,12 +829,19 @@
             window.addEventListener("resize", () => {
                 width = canvas.width = document.documentElement.clientWidth || window.innerWidth;
                 height = canvas.height = window.innerHeight;
-            });
+            }, { passive: true });
 
             window.addEventListener("mousemove", (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-            });
+            }, { passive: true });
+
+            window.addEventListener("touchmove", (e) => {
+                if (e.touches.length > 0) {
+                    mouseX = e.touches[0].clientX;
+                    mouseY = e.touches[0].clientY;
+                }
+            }, { passive: true });
 
             const particles = [];
             const count = window.innerWidth < 768 ? 25 : 55;
