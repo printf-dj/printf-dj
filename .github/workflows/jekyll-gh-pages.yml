@@ -1,0 +1,47 @@
+name: GitHub Pages v2
+
+on:
+  push:
+    branches:
+      - v2
+
+# This controls concurrency and prevents overlapping builds
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Make sure this matches your project's output folder (e.g., './dist' or './build')
+          path: './dist' 
+
+      - name: GitHub Pages v2
+        id: deployment
+        uses: actions/deploy-pages@v4
